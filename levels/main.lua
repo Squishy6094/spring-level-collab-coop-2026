@@ -1,0 +1,2 @@
+-- name: Spring Level Collab 2026
+-- incompatible: romhack
