@@ -30,7 +30,7 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0x0A, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_TOAD, -359, 0, -6076, 0, 0, 0, (77 << 24), bhvToadMessage),
+		OBJECT(E_MODEL_TODD, -432, -24, -6076, 0, 0, 0, (77 << 24), bhvToadMessage),
 		MARIO_POS(0x01, 0, 0, 118, -3762),
 		OBJECT(MODEL_NONE, 0, 118, -3762, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(ccm_area_1_collision),
