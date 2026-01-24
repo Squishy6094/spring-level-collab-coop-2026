@@ -30,11 +30,12 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0x0A, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_TOAD, -359, 0, -6076, 0, 0, 0, (77 << 24), bhvToadMessage),
 		MARIO_POS(0x01, 0, 0, 118, -3762),
 		OBJECT(MODEL_NONE, 0, 118, -3762, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SNOW),
 		TERRAIN_TYPE(TERRAIN_SNOW),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

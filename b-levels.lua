@@ -15,7 +15,7 @@ LEVEL_DATA = {
         id = LEVEL_CCM,
         hubPos = {x = 750, y = 300, z = 1850},
         painting = 0,
-        music = {},
+        music = create_streamed_sequence(SEQ_LEVEL_SNOW, "Cold_Cliffs.ogg", {12.123*16000, 88.931*16000}, true, 1, 5),
     },
     {
         -- Back Left Hub
