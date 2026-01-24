@@ -1,6 +1,8 @@
 
 -- Custom Objects
 
+local E_MODEL_COLLAB_PAINTING = smlua_model_util_get_id("painting_custom_geo")
+
 --- @param o Object
 local function bhv_collab_warp_init(o)
     o.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
@@ -32,8 +34,9 @@ local id_bhvCollabWarp = hook_behavior(nil, OBJ_LIST_LEVEL, true, bhv_collab_war
 
 function spawn_collab_warp(levelDataID, x, y, z)
     ---@param o Object
-    return spawn_non_sync_object(id_bhvCollabWarp, LEVEL_DATA[levelDataID].painting or E_MODEL_STAR, x, y, z, function(o)
+    return spawn_non_sync_object(id_bhvCollabWarp, E_MODEL_COLLAB_PAINTING, x, y, z, function(o)
         o.oStarSelectorType = levelDataID
+        o.oBehParams = LEVEL_DATA[levelDataID].painting
     end)
 end
 
@@ -148,14 +151,14 @@ hook_event(HOOK_ON_HUD_RENDER, hud_render)
 -- Painting Switch State
 function geo_painting_switch_state(n)
     local node = cast_graph_node(n)
-    node.selectedCase = 1
+    node.selectedCase = 0
 end
 
 -- Anims
 smlua_anim_util_register_animation('painting_ripple', 257, 0, 0, 1, 25, { 
-	0, 0, 0, 25, 50, 42, 25, 8, 0, 
-	6, 19, 25, 21, 12, 4, 0, 1, 3, 
-	5, 7, 9, 10, 9, 6, 4, 1, 0, 
+	0, 0, -3, -7, -11, -10, -6, -3, -2, 
+	-1, 0, 0, 0, 0, 0, -1, -2, -2, 
+	-3, -3, -3, -2, -1, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -164,10 +167,9 @@ smlua_anim_util_register_animation('painting_ripple', 257, 0, 0, 1, 25, {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, -6, -11, -10, 
-	-7, -6, -6, -6, -6, -6, -5, -3, -1, 
-	0, 0, -1, -2, -2, -3, -3, -3, -2, 
-	-1, 0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, -25, -50, -33, -2, 15, 10, 
+	-3, -18, -25, -19, -4, 10, 16, 14, 10, 
+	3, -3, -8, -10, -9, -6, -4, -1, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -175,10 +177,11 @@ smlua_anim_util_register_animation('painting_ripple', 257, 0, 0, 1, 25, {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 0, -25, 
-	-50, -42, -25, -8, 0, -6, -19, -25, -21, 
-	-12, -4, 0, -1, -3, -5, -7, -9, -10, 
-	-9, -6, -4, -1, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 50, 100, 66, 
+	4, -29, -21, 5, 36, 50, 37, 8, -20, 
+	-34, -30, -22, -12, -1, 7, 10, 9, 6, 
+	4, 1, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -186,13 +189,13 @@ smlua_anim_util_register_animation('painting_ripple', 257, 0, 0, 1, 25, {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 
 
 },{ 
-	1, 0, 1, 1, 25, 2, 25, 27, 25, 
-	52, 25, 77, 1, 102, 1, 103, 24, 104, 
-	25, 128, 25, 153, 25, 178, 1, 203, 1, 
-	204, 25, 205, 25, 230, 25, 255, 25, 280, 
+	1, 0, 1, 1, 22, 2, 25, 24, 25, 
+	49, 25, 74, 1, 99, 1, 100, 25, 101, 
+	25, 126, 25, 151, 25, 176, 1, 201, 1, 
+	202, 25, 203, 25, 228, 25, 253, 25, 278, 
 	
 
 });
