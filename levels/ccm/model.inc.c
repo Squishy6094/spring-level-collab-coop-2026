@@ -2464,7 +2464,7 @@ Gfx mat_revert_ccm_dl_f3dlite_material_002[] = {
 };
 
 Gfx mat_ccm_dl_f3dlite_material_010[] = {
-	gsSPClearGeometryMode(G_LIGHTING | G_SHADE | G_CULL_BACK),
+	gsSPClearGeometryMode(G_CULL_BACK | G_SHADE | G_LIGHTING),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0),
 	gsDPSetAlphaDither(G_AD_NOISE),
@@ -2482,7 +2482,7 @@ Gfx mat_ccm_dl_f3dlite_material_010[] = {
 };
 
 Gfx mat_revert_ccm_dl_f3dlite_material_010[] = {
-	gsSPSetGeometryMode(G_LIGHTING | G_SHADE | G_CULL_BACK),
+	gsSPSetGeometryMode(G_CULL_BACK | G_SHADE | G_LIGHTING),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
 	gsDPSetTextureLUT(G_TT_NONE),
