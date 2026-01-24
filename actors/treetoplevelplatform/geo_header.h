@@ -1,0 +1,17 @@
+extern const GeoLayout treetoplevelplatform_geo[];
+extern Lights1 treetoplevelplatform_Wood_lights;
+extern Lights1 treetoplevelplatform_Ropes_lights;
+extern u8 treetoplevelplatform_wood_ci8[];
+extern u8 treetoplevelplatform_wood_pal_rgba16[];
+extern u8 treetoplevelplatform_ccm_textures_04800_rgba16_rgba16[];
+extern Vtx treetoplevelplatform_movingplatform_mesh_layer_1_vtx_cull[8];
+extern Vtx treetoplevelplatform_movingplatform_mesh_layer_1_vtx_0[69];
+extern Gfx treetoplevelplatform_movingplatform_mesh_layer_1_tri_0[];
+extern Vtx treetoplevelplatform_movingplatform_mesh_layer_1_vtx_1[15];
+extern Gfx treetoplevelplatform_movingplatform_mesh_layer_1_tri_1[];
+extern Gfx mat_treetoplevelplatform_Wood[];
+extern Gfx mat_revert_treetoplevelplatform_Wood[];
+extern Gfx mat_treetoplevelplatform_Ropes[];
+extern Gfx mat_revert_treetoplevelplatform_Ropes[];
+extern Gfx treetoplevelplatform_movingplatform_mesh_layer_1[];
+extern Gfx treetoplevelplatform_material_revert_render_settings[];
