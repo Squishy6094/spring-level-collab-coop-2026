@@ -37,9 +37,9 @@ LEVEL_DATA = {
     },
     {
         -- Back Right Hub
-        name = "Bob-omb Battlefield",
-        creator = "Nintendo",
-        id = LEVEL_BOB,
+        name = "Cloudy Towers",
+        creator = "Salt",
+        id = LEVEL_RR,
         hubPos = {x = 900, y = 600, z = -600},
         painting = 0,
         music = {},
