@@ -1,4 +1,4 @@
-smlua_text_utils_course_acts_replace(COURSE_THI, "#  OUTSET WILDS", "BEAT UP WIGGLER", "CONQUER THE PILLARS", "SPARKLIUM COLLECTING", "CLEAR CAVE 1", "CLEAR CAVE 2", "CLEAR CAVE 3")
+smlua_text_utils_course_acts_replace(COURSE_THI, "#  OUTSET WILDS", "BEAT UP WIGGLER", "KOOPA THE SWIMMER", "SPARKLIUM COLLECTING", "CLEAR CAVE 1", "CLEAR CAVE 2", "CLEAR CAVE 3")
 
 smlua_text_utils_dialog_replace(DIALOG_008,1,6,95,200,
 "Hey, I heard that\
