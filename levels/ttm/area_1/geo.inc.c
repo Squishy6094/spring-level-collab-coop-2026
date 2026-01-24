@@ -1,14 +1,14 @@
 const GeoLayout ttm_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1200, 0, 0, ttm_dl_Couch_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ttm_dl_Death_Plane_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ttm_dl_House_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ttm_dl_House_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ttm_dl_House_mesh_layer_5),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ttm_dl_LeaveTop_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ttm_dl_LeaveTop_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ttm_dl_Level_Geo_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, ttm_dl_NoCol_mesh_layer_7),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ttm_dl_Ropes_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

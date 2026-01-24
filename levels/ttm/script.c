@@ -33,7 +33,7 @@ const LevelScript level_ttm_entry[] = {
 		OBJECT(E_MODEL_HMC_WOODEN_DOOR, 330, 99, 197, 0, -90, 0, 0x00000000, bhvDoor),
 		MARIO_POS(0x01, 0, 600, 1100, -200),
 		OBJECT(E_MODEL_TREETOPS_PLATFORM_MOVING, 934, 662, 2, 0, 0, 0, 0x00000000, id_bhvJungleMovingPlatform),
-		OBJECT(E_MODEL_WOODEN_SIGNPOST, 480, 99, 488, 0, 0, 0, (46 << 24), bhvWoodenPost),
+		OBJECT(E_MODEL_WOODEN_SIGNPOST, 480, 99, 488, 0, 0, 0, (77 << 24), bhvMessagePanel),
 		OBJECT(MODEL_NONE, 600, 1100, -200, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(ttm_area_1_collision),
 		MACRO_OBJECTS(ttm_area_1_macro_objs),
