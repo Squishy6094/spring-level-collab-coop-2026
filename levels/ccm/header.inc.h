@@ -79,4 +79,3 @@ extern Gfx ccm_dl_Plane_001_mesh_layer_4[];
 extern Gfx ccm_dl_Plane_002_mesh_layer_4[];
 extern Gfx ccm_dl_Plane_003_mesh_layer_4[];
 extern Gfx ccm_dl_Plane_004_mesh_layer_4[];
-extern Gfx ccm_dl_material_revert_render_settings[];
