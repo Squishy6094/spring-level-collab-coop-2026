@@ -1,6 +1,8 @@
 
 -- Custom Objects
 
+local E_MODEL_COLLAB_PAINTING = smlua_model_util_get_id("painting_custom_geo")
+
 --- @param o Object
 local function bhv_collab_warp_init(o)
     o.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
@@ -32,8 +34,9 @@ local id_bhvCollabWarp = hook_behavior(nil, OBJ_LIST_LEVEL, true, bhv_collab_war
 
 function spawn_collab_warp(levelDataID, x, y, z)
     ---@param o Object
-    return spawn_non_sync_object(id_bhvCollabWarp, LEVEL_DATA[levelDataID].painting or E_MODEL_STAR, x, y, z, function(o)
+    return spawn_non_sync_object(id_bhvCollabWarp, E_MODEL_COLLAB_PAINTING, x, y, z, function(o)
         o.oStarSelectorType = levelDataID
+        o.oBehParams = LEVEL_DATA[levelDataID].painting
     end)
 end
 
