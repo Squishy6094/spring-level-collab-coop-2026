@@ -3,6 +3,10 @@
 const GeoLayout thi_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2079, -126, -3017, thi_dl_Flower_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1525, -341, -3404, thi_dl_Flower1_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2469, 90, -3471, thi_dl_Flower2_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1174, -516, -2756, thi_dl_Flower3_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2079, 1, -348, thi_dl_Vert_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 2383, -527, -348, thi_dl_Water_Box_Mesh_mesh_layer_5),
 	GEO_CLOSE_NODE(),
