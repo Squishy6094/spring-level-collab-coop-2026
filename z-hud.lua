@@ -1,9 +1,20 @@
+local squishy_hud = false
+
+local squishy_hud = function(_, value)
+    gPlayerSyncTable[0].squishy_hud = value
+end
+
+hook_mod_menu_checkbox("Custom HUD", false, squishy_hud)
+
 local saveFile = get_current_save_file_num() - 1
 local TEX_COIN = get_texture_info("coin_seg3_texture_03005F80")
 
 local idleTimer = 0
 local starsTrans = 0
 local function hud_render()
+    if gPlayerSyncTable[0].squishy_hud == false then
+        hud_show()
+elseif gPlayerSyncTable[0].squishy_hud == true then
     local m = gMarioStates[0]
     hud_hide()
     djui_hud_set_resolution(RESOLUTION_N64)
@@ -53,7 +64,7 @@ local function hud_render()
             end
         end
     end
-
+end
 end
 
 hook_event(HOOK_ON_HUD_RENDER_BEHIND, hud_render)
