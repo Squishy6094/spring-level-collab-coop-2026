@@ -7,6 +7,14 @@ LEVEL_DATA = {
         hubPos = {x = -750, y = 300, z = 1850},
         painting = 0,
         music = create_streamed_sequence(SEQ_LEVEL_GRASS, "spring-pikmin-adventures.ogg", {0*16000, 52.007*16000}, true, 1, 1),
+        stars = {
+            "BEAT UP WIGGLER",
+            "KOOPA THE SWIMMER",
+            "SPARKLIUM COLLECTING",
+            "CLEAR CAVE 1",
+            "CLEAR CAVE 2",
+            "CLEAR CAVE 3"
+        },
     },
     {
         -- Right Front Hub
@@ -19,9 +27,9 @@ LEVEL_DATA = {
     },
     {
         -- Back Left Hub
-        name = "Bob-omb Battlefield",
-        creator = "Nintendo",
-        id = LEVEL_BOB,
+        name = "Warner Brothers Studio",
+        creator = "WBmarioo",
+        id = LEVEL_LLL,
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
         music = 0,
@@ -46,3 +54,13 @@ LEVEL_DATA = {
     },
     music = create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1),
 }
+
+
+--- Init data
+for i = 1, #LEVEL_DATA do
+    local data = LEVEL_DATA[i]
+    local stars = data.stars or {}
+    local course = get_level_course_num(data.id)
+    local levelName = string.upper(data.name)
+    smlua_text_utils_course_acts_replace(course, levelName, stars[1] or "?", stars[2] or "?", stars[3] or "?", stars[4] or "?", stars[5] or "?", stars[6] or "?")
+end
