@@ -9,7 +9,8 @@ E_MODEL_GREEN_TOAD = smlua_model_util_get_id("green_toad_geo")
 
 smlua_text_utils_dialog_replace(DIALOG_153, 1, 4, 30, 200, "This view looks great.\
 You can press C-Up to look\
-at the skyline!")
+around! Look at the\
+star for good luck!")
 
 smlua_text_utils_dialog_replace(DIALOG_154, 1, 4, 30, 200, "Gee, its super hot in here.\
 I lost the others, they\

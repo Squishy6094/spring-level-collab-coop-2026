@@ -18,6 +18,10 @@ Lights1 lll_dl_wing_cap_tree_wood_warp_UNUSED_lights = gdSPDefLights1(
 	0x7F, 0x4D, 0x4B,
 	0xFF, 0x9F, 0x9B, 0x28, 0x28, 0x28);
 
+Lights1 lll_dl_star_body_lights = gdSPDefLights1(
+	0xBC, 0xBC, 0xBC,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
+
 Lights1 lll_dl_sm64_water_mat_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
@@ -1241,6 +1245,39 @@ Gfx lll_dl_Level_Mesh_mesh_layer_1_tri_3[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx lll_dl_star_mesh_mesh_layer_1_vtx_cull[8] = {
+	{{{-91, 0, 72}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{-91, 0, 72}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{-91, 0, -88}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{-91, 0, -88}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{92, 0, 72}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{92, 0, 72}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{92, 0, -88}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+	{{{92, 0, -88}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+};
+
+Vtx lll_dl_star_mesh_mesh_layer_1_vtx_0[10] = {
+	{{{-91, 0, -30}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{-52, 0, 15}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{-34, 0, -35}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{34, 0, -35}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{52, 0, 15}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{0, 0, 46}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{-67, 0, 72}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{68, 0, 72}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{92, 0, -30}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+	{{{0, 0, -88}, 0, {-529, 495}, {0x00, 0x7F, 0x00, 0xFF}}},
+};
+
+Gfx lll_dl_star_mesh_mesh_layer_1_tri_0[] = {
+	gsSPVertex(lll_dl_star_mesh_mesh_layer_1_vtx_0 + 0, 10, 0),
+	gsSP2Triangles(0, 1, 2, 0, 2, 1, 3, 0),
+	gsSP2Triangles(3, 1, 4, 0, 4, 1, 5, 0),
+	gsSP2Triangles(6, 5, 1, 0, 5, 7, 4, 0),
+	gsSP2Triangles(8, 3, 4, 0, 3, 9, 2, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx lll_dl_Water_Box_Mesh_mesh_layer_5_vtx_cull[8] = {
 	{{{-3600, 0, 3600}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
 	{{{-3600, 0, 3600}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
@@ -1915,6 +1952,31 @@ Gfx mat_revert_lll_dl_wing_cap_tree_wood_warp_UNUSED[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_lll_dl_star_body[] = {
+	gsSPGeometryMode(G_CULL_BACK, G_TEXTURE_GEN),
+	gsSPSetLights1(lll_dl_star_body_lights),
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetAlphaDither(G_AD_NOISE),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsSPTexture(1984, 1984, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 255, 177, 117, 255),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, lll_dl_star_surface_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_lll_dl_star_body[] = {
+	gsSPGeometryMode(G_TEXTURE_GEN, G_CULL_BACK),
+	gsDPPipeSync(),
+	gsDPSetAlphaDither(G_AD_DISABLE),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_lll_dl_sm64_water_mat[] = {
 	gsSPSetLights1(lll_dl_sm64_water_mat_lights),
 	gsDPPipeSync(),
@@ -2006,6 +2068,17 @@ Gfx lll_dl_Level_Mesh_mesh_layer_1[] = {
 	gsSPDisplayList(mat_lll_dl_wing_cap_tree_wood_warp_UNUSED),
 	gsSPDisplayList(lll_dl_Level_Mesh_mesh_layer_1_tri_3),
 	gsSPDisplayList(mat_revert_lll_dl_wing_cap_tree_wood_warp_UNUSED),
+	gsSPEndDisplayList(),
+};
+
+Gfx lll_dl_star_mesh_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(lll_dl_star_mesh_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_lll_dl_star_body),
+	gsSPDisplayList(lll_dl_star_mesh_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_lll_dl_star_body),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),

@@ -14,3 +14,7 @@ Texture lll_dl_tree_rgba16[] = {
 	#include "levels/lll/tree.rgba16.inc.c"
 };
 
+Texture lll_dl_star_surface_rgba16[] = {
+	#include "levels/lll/star_surface.rgba16.inc.c"
+};
+
