@@ -1,4 +1,4 @@
---lava forest level? haven't worked out the clankers on it yet
+gLevelValues.wingCapLookUpReq = 0
 smlua_text_utils_course_acts_replace(COURSE_LLL, "#  HEART OF THE FIRE", "1", "2", "3", "4", "5", "6")
 
 E_MODEL_CAPTAIN_TOAD = smlua_model_util_get_id("captain_toad_geo")
