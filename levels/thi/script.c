@@ -40,7 +40,7 @@ const LevelScript level_thi_entry[] = {
 		OBJECT(E_MODEL_TOAD, 218, -408, 53, 0, -119, 0, (8 << 24), id_bhvToadMessage),
 		OBJECT(E_MODEL_TOAD, 2131, -496, 2605, 0, 154, 0, (18 << 24), id_bhvToadMessage),
 		OBJECT(MODEL_NONE, -410, -207, 0, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
-		OBJECT(E_MODEL_WIGGLER_HEAD, 3582, 1141, -3101, 0, 0, 0, 0x00000000, id_bhvWigglerHead),
+		OBJECT(E_MODEL_WIGGLER_HEAD, 3582, 855, -3101, 0, 0, 0, 0x00000000, id_bhvWigglerHead),
 		TERRAIN(thi_area_1_collision),
 		MACRO_OBJECTS(thi_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
