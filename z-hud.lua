@@ -1,10 +1,44 @@
-local squishy_hud = false
+-- Overwrite Default Functions
+local og_hud_hide = hud_hide
+local og_hud_show = hud_show
+local og_hud_is_hidden = hud_is_hidden
+local og_hud_get_value = hud_get_value
+local og_hud_set_value = hud_set_value
 
-local squishy_hud = function(_, value)
-    gPlayerSyncTable[0].squishy_hud = value
+local collabHud = true
+local collabFlags = HUD_DISPLAY_FLAGS_COIN_COUNT | HUD_DISPLAY_FLAG_STAR_COUNT | HUD_DISPLAY_FLAG_POWER | HUD_DISPLAY_FLAG_LIVES
+
+local function collab_hud_hide()
+    collabHud = false
+    og_hud_hide()
+end
+local function collab_hud_show()
+    collabHud = true
+    og_hud_show()
+end
+local function collab_hud_is_hidden()
+    return not collabHud and og_hud_is_hidden()
+end
+local function collab_hud_get_value(type)
+    if type == HUD_DISPLAY_FLAGS then
+        return og_hud_get_value(type) & ~collabFlags
+    else
+        return og_hud_get_value(type)
+    end
+end
+local function collab_hud_set_value(type, value)
+    if type == HUD_DISPLAY_FLAGS then
+        collabFlags = value
+    else
+        og_hud_set_value(type, value)
+    end
 end
 
-hook_mod_menu_checkbox("Custom HUD", false, squishy_hud)
+_G.hud_hide = collab_hud_hide
+_G.hud_show = collab_hud_show
+_G.hud_is_hidden = collab_hud_is_hidden
+_G.hud_get_value = collab_hud_get_value
+_G.hud_set_value = collab_hud_set_value
 
 local saveFile = get_current_save_file_num() - 1
 local TEX_COIN = get_texture_info("coin_seg3_texture_03005F80")
@@ -12,11 +46,9 @@ local TEX_COIN = get_texture_info("coin_seg3_texture_03005F80")
 local idleTimer = 0
 local starsTrans = 0
 local function hud_render()
-    if gPlayerSyncTable[0].squishy_hud == false then
-        hud_show()
-elseif gPlayerSyncTable[0].squishy_hud == true then
+    if not collabHud then return end
     local m = gMarioStates[0]
-    hud_hide()
+    og_hud_hide()
     djui_hud_set_resolution(RESOLUTION_N64)
     local screenWidth = djui_hud_get_screen_width() - 1
     local screenHeight = djui_hud_get_screen_height()
@@ -46,7 +78,7 @@ elseif gPlayerSyncTable[0].squishy_hud == true then
         else
             idleTimer = 0
         end
-        if lvlData.stars then
+        if lvlData.stars and collabFlags & HUD_DISPLAY_FLAG_STAR_COUNT ~= 0 then
             for i = 1, #lvlData.stars do
                 if save_file_get_star_flags(saveFile, gNetworkPlayers[0].currCourseNum - 1) & (1 << (i - 1)) ~= 0 then
                     djui_hud_set_color(255, 255, 255, starsTrans)
@@ -64,7 +96,6 @@ elseif gPlayerSyncTable[0].squishy_hud == true then
             end
         end
     end
-end
 end
 
 hook_event(HOOK_ON_HUD_RENDER_BEHIND, hud_render)
