@@ -13,3 +13,8 @@ local function warp_to_hub()
     warp_to_level(LEVEL_CASTLE_GROUNDS, 1, 0)
 end
 hook_event(HOOK_ON_PAUSE_EXIT, warp_to_hub)
+
+local function on_death()
+    gMarioStates[0].numLives = 99
+end
+hook_event(HOOK_ON_DEATH, on_death)
