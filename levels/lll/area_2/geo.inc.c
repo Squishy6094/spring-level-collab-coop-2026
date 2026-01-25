@@ -2,7 +2,8 @@ const GeoLayout lll_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Level_Mesh_2_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Log_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Level_Mesh_2_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 389, 0, lll_dl_Log_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
