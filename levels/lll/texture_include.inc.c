@@ -14,7 +14,3 @@ Texture lll_dl_leaves_rgba16[] = {
 	#include "levels/lll/leaves.rgba16.inc.c"
 };
 
-Texture lll_dl_cave_rock_rgba16[] = {
-	#include "levels/lll/cave_rock.rgba16.inc.c"
-};
-
