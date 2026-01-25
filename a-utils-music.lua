@@ -118,14 +118,6 @@ local function on_packet_receive(data)
     end
 end
 
-local function mario_update(m)
-    if m.playerIndex ~= 0 then return end
-
-    if m.controller.buttonPressed & X_BUTTON ~= 0 then
-        play_sample(SOUND_GENERAL_BONEBREAK, m.pos)
-    end
-end
-
 local function on_warps(type)
     stop_all_samples()
 end
@@ -134,7 +126,6 @@ hook_event(HOOK_ON_LEVEL_INIT, on_warps)
 hook_event(HOOK_ON_WARP, on_warps)
 hook_event(HOOK_UPDATE, streamed_audio_update)
 hook_event(HOOK_ON_SEQ_LOAD, on_seq_load)
-hook_event(HOOK_MARIO_UPDATE, mario_update)
 hook_event(HOOK_ON_PLAY_SOUND, on_play_sound)
 hook_event(HOOK_ON_PACKET_RECEIVE, on_packet_receive)
 

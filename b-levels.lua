@@ -6,7 +6,7 @@ LEVEL_DATA = {
         id = LEVEL_THI,
         hubPos = {x = -750, y = 300, z = 1850},
         painting = 0,
-        music = create_streamed_sequence(SEQ_LEVEL_GRASS, "spring-pikmin-adventures.ogg", {12.123*16000, 88.931*16000}, true, 1, 2),
+        music = create_streamed_sequence(SEQ_LEVEL_GRASS, "spring-pikmin-adventures.ogg", {0*16000, 52.007*16000}, true, 1, 1),
     },
     {
         -- Right Front Hub
@@ -15,7 +15,7 @@ LEVEL_DATA = {
         id = LEVEL_CCM,
         hubPos = {x = 750, y = 300, z = 1850},
         painting = 0,
-        music = create_streamed_sequence(SEQ_LEVEL_SNOW, "Cold_Cliffs.ogg", {0*16000, 128*16000}, true, 1, 5),
+        music = create_streamed_sequence(SEQ_LEVEL_SNOW, "Cold_Cliffs.ogg", {0*16000, 128*16000}, true, 1, 1),
     },
     {
         -- Back Left Hub
@@ -24,7 +24,7 @@ LEVEL_DATA = {
         id = LEVEL_BOB,
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
-        music = {},
+        music = 0,
     },
     {
         -- Back Center Hub
@@ -33,7 +33,7 @@ LEVEL_DATA = {
         id = LEVEL_TTM,
         hubPos = {x = 0, y = 700, z = -1000},
         painting = 0,
-        music = {},
+        music = 0,
     },
     {
         -- Back Right Hub
@@ -42,7 +42,7 @@ LEVEL_DATA = {
         id = LEVEL_RR,
         hubPos = {x = 900, y = 600, z = -600},
         painting = 0,
-        music = {},
+        music = 0,
     },
     music = create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1),
 }
