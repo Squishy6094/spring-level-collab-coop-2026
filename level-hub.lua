@@ -1,5 +1,5 @@
 local E_MODEL_COLLAB_PAINTING = smlua_model_util_get_id("painting_custom_geo")
-local ACT_MARIO_COLLAB_WARP = allocate_mario_action(ACT_GROUP_CUTSCENE)
+local ACT_MARIO_COLLAB_WARP = allocate_mario_action(ACT_GROUP_CUTSCENE | ACT_FLAG_INTANGIBLE)
 local PAINTING_ANIM_RIPPLE = "painting_ripple"
 
 -- Anims
@@ -68,9 +68,9 @@ end
 --- @param o Object
 local function bhv_collab_warp_loop(o)
     o.oPosY = o.oHomeY + math.sin((get_global_timer() + 10*o.oStarSelectorType)*0.02)*50
-    local m0 = gMarioStates[0]
-    local m = gMarioStates[network_local_index_from_global(obj_get_nearest_object_with_behavior_id(o, id_bhvMario).globalPlayerIndex)] ---@type MarioState
-    if m0.action ~= ACT_MARIO_COLLAB_WARP then
+    
+    local m = nearest_mario_state_to_object(o) ---@type MarioState
+    if m.action ~= ACT_MARIO_COLLAB_WARP then
         o.oFaceAngleYaw = atan2s(m.pos.z - o.oPosZ, m.pos.x - o.oPosX)
         o.oFaceAnglePitch = -0x4000 + atan2s(m.pos.y - o.oPosY, math.sqrt((m.pos.x - o.oPosX)^2 + (m.pos.z - o.oPosZ)^2))
     else
