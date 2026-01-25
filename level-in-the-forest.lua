@@ -1,0 +1,16 @@
+--lava forest level? haven't worked out the clankers on it yet
+E_MODEL_CAPTAIN_TOAD = smlua_model_util_get_id("captain_toad_geo")
+
+E_MODEL_PINK_TOAD = smlua_model_util_get_id("pink_toad_geo")
+
+E_MODEL_GREEN_TOAD = smlua_model_util_get_id("green_toad_geo")
+
+smlua_text_utils_dialog_replace(DIALOG_154, 1, 4, 30, 200, "Gee, its super hot in here.\
+I lost the others, they\
+should be further up.\
+Be careful!")
+
+smlua_text_utils_dialog_replace(DIALOG_155, 1, 4, 30, 200, "I hate green toad.\
+Literally hue shifted me,\
+lame as piss!!!")
+

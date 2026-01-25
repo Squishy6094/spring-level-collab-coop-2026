@@ -19,9 +19,9 @@ LEVEL_DATA = {
     },
     {
         -- Back Left Hub
-        name = "Bob-omb Battlefield",
-        creator = "Nintendo",
-        id = LEVEL_BOB,
+        name = "Warner Brothers Studio",
+        creator = "WBmarioo",
+        id = LEVEL_LLL,
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
         music = 0,
