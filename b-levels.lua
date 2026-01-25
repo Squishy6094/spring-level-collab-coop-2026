@@ -50,7 +50,15 @@ LEVEL_DATA = {
         id = LEVEL_RR,
         hubPos = {x = 900, y = 600, z = -600},
         painting = 0,
-        music = 0,
+        music = create_streamed_sequence(SEQ_LEVEL_SPOOKY, "Cloudy_towers.ogg", {0*16000, 128*16000}, true, 1, 5),
+        stars = {
+            "CLIMB THE TWIN TOWERS",
+            "QUICK TIME BOX SWITCH",
+            "WALL KICKS ARE REQUIRED",
+            "RED COINS ABOVE THE CLOUDS",
+            "CLEAR CAVE 2",
+            "CLEAR CAVE 3"
+        },
     },
     music = create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1),
 }
