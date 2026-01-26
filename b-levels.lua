@@ -6,13 +6,14 @@ LEVEL_DATA = {
         id = LEVEL_THI,
         hubPos = {x = -750, y = 300, z = 1850},
         painting = 0,
+        music = create_streamed_sequence(SEQ_LEVEL_GRASS, "music-pikmin.ogg", {0*16000, 52.007*16000}, true, 1, 1),
         stars = {
-            "BEAT UP WIGGLER",
+            "CREATURE IN THE POT",
             "KOOPA THE SWIMMER",
             "SPARKLIUM COLLECTING",
-            "CLEAR CAVE 1",
-            "CLEAR CAVE 2",
-            "CLEAR CAVE 3"
+            "EMERGENCE CAVERN",
+            "CHILLY CREVASSE",
+            "THE THIRD CAVE"
         },
     },
     {
@@ -22,6 +23,7 @@ LEVEL_DATA = {
         id = LEVEL_CCM,
         hubPos = {x = 750, y = 300, z = 1850},
         painting = 0,
+        music = create_streamed_sequence(SEQ_LEVEL_SNOW, "music-cold-cliffs.ogg", {0*16000, 128*16000}, true, 1, 5),
     },
     {
         -- Back Left Hub
@@ -30,8 +32,9 @@ LEVEL_DATA = {
         id = LEVEL_LLL,
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
-        stars = {
-            "Saving Captain Toad",
+        music = 0,
+        stars = { --WB for future reference these all need to be uppercase -kaktus
+            "SAVING CAPTAIN TOAD",
             "TBD 1",
             "Red Coin (TBD Name)",
             "TBD 2",
@@ -46,6 +49,7 @@ LEVEL_DATA = {
         id = LEVEL_TTM,
         hubPos = {x = 0, y = 700, z = -1000},
         painting = 0,
+        music = 0,
     },
     {
         -- Back Right Hub
@@ -54,6 +58,7 @@ LEVEL_DATA = {
         id = LEVEL_RR,
         hubPos = {x = 900, y = 600, z = -600},
         painting = 0,
+        music = create_streamed_sequence(SEQ_LEVEL_SPOOKY, "music-above-the-clouds.ogg", {0*16000, 128*16000}, true, 1, 3),
         stars = {
             "CLIMB THE TWIN TOWERS",
             "QUICK TIME BOX SWITCH",
@@ -63,12 +68,9 @@ LEVEL_DATA = {
             "CLEAR CAVE 3"
         },
     },
+    music = create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1),
 }
 
-create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1)
-create_streamed_sequence(SEQ_LEVEL_SPOOKY, "music-above-the-clouds.ogg", {2.152*16000, 105.913*16000}, true, 1, 2)
-create_streamed_sequence(SEQ_LEVEL_SNOW, "music-cold-cliffs.ogg", {0*16000, 128*16000}, true, 1, 5)
-create_streamed_sequence(SEQ_LEVEL_GRASS, "music-pikmin.ogg", {0*16000, 52.007*16000}, true, 1, 1)
 
 --- Init data
 for i = 1, #LEVEL_DATA do
