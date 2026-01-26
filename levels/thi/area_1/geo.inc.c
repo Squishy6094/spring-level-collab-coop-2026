@@ -1,6 +1,7 @@
 const GeoLayout thi_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2952, -487, 870, 90, 0, 0, thi_dl_CaveHole1_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 5516, 2290, -7747, 0, 91, 0, thi_dl_Cylinder_001_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 11703, 3031, -5628, 0, -53, 0, thi_dl_Cylinder_002_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 7761, 2543, -11797, 0, -35, 0, thi_dl_Cylinder_008_mesh_layer_1),
