@@ -556,26 +556,15 @@ Texture charlotetree_snowtree2_pal_rgba16[] = {
 	0x20, 0x85, 0x41, 0x4b, 0x18, 0x83, 
 };
 
-Vtx charlotetree_Plane_002_mesh_layer_4_vtx_cull[8] = {
-	{{{-460, -5, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{-460, 899, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{-460, 899, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{-460, -5, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{460, -5, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{460, 899, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{460, 899, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
-	{{{460, -5, 0}, 0, {0, 0}, {0x00, 0x00, 0x00, 0x00}}},
+Vtx charlotetree_Display_mesh_layer_4_vtx_0[4] = {
+	{{{-316, -35, 0}, 0, {-16, 2032}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{316, -35, 0}, 0, {2032, 2032}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{316, 597, 0}, 0, {2032, -16}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-316, 597, 0}, 0, {-16, -16}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Vtx charlotetree_Plane_002_mesh_layer_4_vtx_0[4] = {
-	{{{-460, -5, 0}, 0, {-16, 2032}, {0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{460, -5, 0}, 0, {2032, 2032}, {0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{460, 899, 0}, 0, {2032, -16}, {0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-460, 899, 0}, 0, {-16, -16}, {0xFF, 0xFF, 0xFF, 0xFF}}},
-};
-
-Gfx charlotetree_Plane_002_mesh_layer_4_tri_0[] = {
-	gsSPVertex(charlotetree_Plane_002_mesh_layer_4_vtx_0 + 0, 4, 0),
+Gfx charlotetree_Display_mesh_layer_4_tri_0[] = {
+	gsSPVertex(charlotetree_Display_mesh_layer_4_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -607,13 +596,9 @@ Gfx mat_revert_charlotetree_f3dlite_material_010[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx charlotetree_Plane_002_mesh_layer_4[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(charlotetree_Plane_002_mesh_layer_4_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+Gfx charlotetree_Display_mesh_layer_4[] = {
 	gsSPDisplayList(mat_charlotetree_f3dlite_material_010),
-	gsSPDisplayList(charlotetree_Plane_002_mesh_layer_4_tri_0),
+	gsSPDisplayList(charlotetree_Display_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_charlotetree_f3dlite_material_010),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
