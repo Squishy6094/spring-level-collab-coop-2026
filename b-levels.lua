@@ -6,7 +6,7 @@ LEVEL_DATA = {
         id = LEVEL_THI,
         hubPos = {x = -750, y = 300, z = 1850},
         painting = 0,
-        music = create_streamed_sequence(SEQ_LEVEL_GRASS, "music-pikmin.ogg", {0*16000, 52.007*16000}, true, 1, 1),
+        music = create_streamed_sequence(SEQ_LEVEL_GRASS, "music-pikmin.ogg", {0*16000, 82.650*16000}, true, 1, 2.5),
         stars = {
             "CREATURE IN THE POT",
             "KOOPA THE SWIMMER",
