@@ -58,7 +58,7 @@ LEVEL_DATA = {
         id = LEVEL_RR,
         hubPos = {x = 900, y = 600, z = -600},
         painting = 0,
-        music = create_streamed_sequence(SEQ_LEVEL_SPOOKY, "Cloudy_towers.ogg", {0*16000, 128*16000}, true, 1, 5),
+        music = create_streamed_sequence(SEQ_LEVEL_SPOOKY, "Cloudy_towers.ogg", {0*16000, 128*16000}, true, 1, 3),
         stars = {
             "CLIMB THE TWIN TOWERS",
             "QUICK TIME BOX SWITCH",
