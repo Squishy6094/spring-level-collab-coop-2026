@@ -33,6 +33,14 @@ LEVEL_DATA = {
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
         music = 0,
+        stars = {
+            "Saving Captain Toad",
+            "TBD 1",
+            "Red Coin (TBD Name)",
+            "TBD 2",
+            "TBD 3",
+            "(TBD Metal Cap Star)"
+        },
     },
     {
         -- Back Center Hub
