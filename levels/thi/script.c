@@ -29,9 +29,11 @@ const LevelScript level_thi_entry[] = {
 
 	AREA(1, thi_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x94, LEVEL_THI, 0x02, 0x95, WARP_NO_CHECKPOINT),
 		OBJECT(E_MODEL_GOOMBA, 822, -74, -2096, 0, 0, 0, (1 << 16), id_bhvGoomba),
+		OBJECT(E_MODEL_NONE, 2954, -484, 857, 0, 0, 0, (0x94 << 16), id_bhvInstantActiveWarp),
 		OBJECT(E_MODEL_YELLOW_COIN, 1176, 182, -2758, 0, 0, 0, (1 << 16), id_bhvYellowCoin),
 		OBJECT(E_MODEL_YELLOW_COIN, 1529, 353, -3409, 0, 0, 0, (1 << 16), id_bhvYellowCoin),
 		OBJECT(E_MODEL_YELLOW_COIN, 2079, 560, -3020, 0, 0, 0, (1 << 16), id_bhvYellowCoin),
@@ -54,8 +56,22 @@ const LevelScript level_thi_entry[] = {
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
+	AREA(2, thi_area_2),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		MARIO_POS(0x01, 0, -410, 1839, -1668),
+		OBJECT(E_MODEL_STAR, 4097, 757, -774, 0, 56, 0, 0x00000000, id_bhvStar),
+		OBJECT(MODEL_NONE, -410, 1839, -1668, 0, 0, 0, (0x95 << 16), bhvSpinAirborneWarp),
+		TERRAIN(thi_area_2_collision),
+		MACRO_OBJECTS(thi_area_2_macro_objs),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_UNDERGROUND),
+		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 0, -410, -207, 0),
+	MARIO_POS(0x01, 0, -410, 1839, -1668),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
