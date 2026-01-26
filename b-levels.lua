@@ -8,12 +8,12 @@ LEVEL_DATA = {
         painting = 0,
         music = create_streamed_sequence(SEQ_LEVEL_GRASS, "spring-pikmin-adventures.ogg", {0*16000, 52.007*16000}, true, 1, 1),
         stars = {
-            "BEAT UP WIGGLER",
+            "CREATURE IN THE POT",
             "KOOPA THE SWIMMER",
             "SPARKLIUM COLLECTING",
-            "CLEAR CAVE 1",
-            "CLEAR CAVE 2",
-            "CLEAR CAVE 3"
+            "EMERGENCE CAVERN",
+            "CHILLY CREVASSE",
+            "THE THIRD CAVE"
         },
     },
     {
@@ -33,8 +33,8 @@ LEVEL_DATA = {
         hubPos = {x = -900, y = 600, z = -600},
         painting = 0,
         music = 0,
-        stars = {
-            "Saving Captain Toad",
+        stars = { --WB for future reference these all need to be uppercase -kaktus
+            "SAVING CAPTAIN TOAD",
             "TBD 1",
             "Red Coin (TBD Name)",
             "TBD 2",
