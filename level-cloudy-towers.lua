@@ -5,7 +5,7 @@ add_level_data({
     hubPos = {x = 900, y = 600, z = -600},
     painting = 0,
     stars = {
-        "CLIMB THE TWIN TOWERS",
+        "CLIMB THE DOUBLE TOWERS",
         "QUICK TIME BOX SWITCH",
         "WALL KICKS ARE REQUIRED",
         "RED COINS ABOVE THE CLOUDS",
