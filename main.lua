@@ -7,6 +7,7 @@ gLevelValues.exitCastleWarpNode = 0x0A
 gLevelValues.entryLevel = LEVEL_CASTLE_GROUNDS
 gLevelValues.fixCollisionBugs = true
 gLevelValues.disableActs = true
+gServerSettings.skipIntro = true
 
 -- Ensure you're always in grounds
 local function warp_to_hub()
