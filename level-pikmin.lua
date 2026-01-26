@@ -1,3 +1,20 @@
+add_level_data({
+    name = (math.random(0, 100) == 69 and "Out Pik the Hut" or "Outset Wilds"),
+    creator = "Kaktus64",
+    id = LEVEL_THI,
+    hubPos = {x = -750, y = 300, z = 1850},
+    painting = 0,
+    stars = {
+        "CREATURE IN THE POT",
+        "KOOPA THE SWIMMER",
+        "SPARKLIUM COLLECTING",
+        "EMERGENCE CAVERN",
+        "CHILLY CREVASSE",
+        "THE THIRD CAVE"
+    },
+})
+create_streamed_sequence(SEQ_LEVEL_GRASS, "music-pikmin.ogg", {0*16000, 82.650*16000}, true, 1, 2.5)
+
 smlua_text_utils_dialog_replace(DIALOG_008,1,6, 30, 200, -- TOAD 1 TEXT
 "Hey, I heard that\
 there's some hidden\
