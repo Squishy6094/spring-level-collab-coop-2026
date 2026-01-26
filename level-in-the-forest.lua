@@ -1,6 +1,22 @@
+add_level_data({
+    name = "Heart of the Fire",
+    creator = "WBmarioo",
+    id = LEVEL_LLL,
+    hubPos = {x = -900, y = 600, z = -600},
+    painting = 0,
+    music = 0,
+    stars = { --WB for future reference these all need to be uppercase -kaktus
+        "SAVING CAPTAIN TOAD",
+        "TBD 1",
+        "Red Coin (TBD Name)",
+        "TBD 2",
+        "TBD 3",
+        "(TBD Metal Cap Star)"
+    },
+})
+
 gLevelValues.wingCapLookUpReq = 0
 gBehaviorValues.ToadStar1Requirement = 0
-smlua_text_utils_course_acts_replace(COURSE_LLL, "#  HEART OF THE FIRE", "1", "2", "3", "4", "5", "6")
 
 E_MODEL_CAPTAIN_TOAD = smlua_model_util_get_id("captain_toad_geo")
 

@@ -1,3 +1,11 @@
+add_level_data({
+    name = "Spring Level Collab 2026",
+    creator = "Squishy6094",
+    id = LEVEL_CASTLE_GROUNDS,
+    painting = 0,
+})
+create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.123*16000, 88.931*16000}, true, 1, 1)
+
 local E_MODEL_COLLAB_PAINTING = smlua_model_util_get_id("painting_custom_geo")
 local ACT_MARIO_COLLAB_WARP = allocate_mario_action(ACT_GROUP_CUTSCENE | ACT_FLAG_INTANGIBLE)
 local PAINTING_ANIM_RIPPLE = "painting_ripple"
@@ -92,7 +100,9 @@ local function on_sync()
     if gNetworkPlayers[0].currLevelNum ~= LEVEL_CASTLE_GROUNDS then return end
     for i = 1, #LEVEL_DATA do
         local data = LEVEL_DATA[i]
-        spawn_collab_warp(i, data.hubPos.x, data.hubPos.y, data.hubPos.z)
+        if data.hubPos ~= nil then
+            spawn_collab_warp(i, data.hubPos.x, data.hubPos.y, data.hubPos.z)
+        end
     end
 end
 

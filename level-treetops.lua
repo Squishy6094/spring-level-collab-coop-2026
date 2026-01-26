@@ -1,3 +1,12 @@
+add_level_data({
+    name = "Tree-Top Tumble",
+    creator = "Saultube",
+    id = LEVEL_TTM,
+    hubPos = {x = 0, y = 700, z = -1000},
+    painting = 0,
+    music = 0,
+})
+
 local PlatformPath = { -- from levels\ttm\area_1\spline.inc.c
     [0]  = {x = 945,  y = 672,  z = -144},
     [1]  = {x = 1024,  y = 689,  z = -406},
