@@ -24,6 +24,15 @@ gBehaviorValues.dialogs.ToadStar2AfterDialog = 0xFFFF
 gBehaviorValues.dialogs.ToadStar3AfterDialog = 0xFFFF
 
 function bhv_custom_toad_message_init(o)
+    o.oFlags = o.oFlags | (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)
+    o.oAnimations = gObjectAnimations.toad_seg6_anims_0600FB58
+    cur_obj_init_animation(6)
+    o.oInteractType = INTERACT_TEXT
+    o.hitboxRadius = 80
+    o.hitboxHeight = 100
+    o.oIntangibleTimer = 0
+    bhv_init_room()
+
     local dialogId = (o.oBehParams >> 24) & 0xFF
     local toadData = toadStars[dialogId]
 
@@ -92,6 +101,8 @@ function bhv_custom_toad_message_loop(o)
         end
     end
 end
+
+hook_behavior(id_bhvToadMessage, OBJ_LIST_GENACTOR, true, bhv_custom_toad_message_init, bhv_custom_toad_message_loop, "bhvToadMessage")
 
 ---@param dialogId integer The dialog ID that the toad spawns with
 ---@param starID integer The ID of the star spawned (0-5)
