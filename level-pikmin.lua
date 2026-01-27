@@ -77,4 +77,6 @@ later...")
 gLevelValues.starPositions.WigglerStarPos.x = 3606
 gLevelValues.starPositions.WigglerStarPos.y = 1228
 gLevelValues.starPositions.WigglerStarPos.z = -3034
-
+gLevelValues.starPositions.ChillBullyStarPos.x = 2837
+gLevelValues.starPositions.ChillBullyStarPos.y = 5690
+gLevelValues.starPositions.ChillBullyStarPos.z = -448
