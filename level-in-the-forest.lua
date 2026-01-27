@@ -167,8 +167,6 @@ function obj_set_hitbox(obj, hitbox)
     _obj_set_hitbox(obj, objHitbox)
 end
 
---oAnimations = gObjectAnimations.blargg_seg5_anims_0500616C
-
 ----- Blargg -----
 
 -- Animation ID
@@ -310,12 +308,12 @@ end
 
 ---@param obj Object
 function bhv_blargg_init(obj)
+    obj.oAnimations = gObjectAnimations.blargg_seg5_anims_0500616C
     cur_obj_init_animation(ANM_swim)
     obj_set_model_extended(obj, E_MODEL_BLARGG)
     obj.oGravity = 4.0
     obj.oFriction = 0.91
     obj.oBuoyancy = 1.3
-
     obj_set_hitbox(obj, sBlarggHitbox)
     network_init_object(obj, true, nil)
 end
