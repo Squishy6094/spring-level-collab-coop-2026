@@ -58,7 +58,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_NONE, 1747, 800, 319, 0, -90, 0, (0x93 << 16), bhvSpinAirborneWarp),
 		OBJECT(E_MODEL_PINK_TOAD, -353, 0, 319, 0, 0, 0, (DIALOG_068 << 24), bhvToadMessage),
 		OBJECT(MODEL_RED_COIN, -353, 0, 938, 0, 0, 0, 0x000A0000, bhvRedCoin),
-		OBJECT(MODEL_NONE, 72, 355, 938, 0, 0, 0, 0x00000000, bhvHiddenRedCoinStar),
+		OBJECT(MODEL_NONE, 72, 355, 938, 0, 0, 0, (0x03 << 24), bhvHiddenRedCoinStar),
 		OBJECT(MODEL_NONE, 72, 0, 938, 0, 0, 0, 0x00000000, bhvRedCoinStarMarker),
 		OBJECT(MODEL_RED_COIN, -353, 0, 1088, 0, 0, 0, 0x000A0000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -353, 0, 1238, 0, 0, 0, 0x000A0000, bhvRedCoin),
