@@ -118,6 +118,10 @@ end
 o.oPosY = o.oPosY + o.oVelY
 end
 
+id_bhvRisingLavaPlatform = hook_behavior(id_bhvRisingLavaPlatform, OBJ_LIST_SURFACE, true, rising_lava_platform_init, rising_lava_platform_loop)
+
+--WIP Blargg bhv
+
 local BLARGG_ACT_SWIM = 0
 local BLARGG_ACT_CHASE = 1
 local BLARGG_ACT_KNOCKBACK = 2
@@ -162,6 +166,9 @@ function obj_set_hitbox(obj, hitbox)
     end
     _obj_set_hitbox(obj, objHitbox)
 end
+
+--oAnimations = gObjectAnimations.blargg_seg5_anims_0500616C
+
 ----- Blargg -----
 
 -- Animation ID
@@ -349,4 +356,3 @@ function bhv_blargg_loop(obj)
 end
 
 id_bhvBlargg = hook_behavior(nil, OBJ_LIST_GENACTOR, false, bhv_blargg_init, bhv_blargg_loop, "bhvBlargg")
-id_bhvRisingLavaPlatform = hook_behavior(id_bhvRisingLavaPlatform, OBJ_LIST_SURFACE, true, rising_lava_platform_init, rising_lava_platform_loop)
