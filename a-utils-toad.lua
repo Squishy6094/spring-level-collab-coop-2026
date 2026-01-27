@@ -5,111 +5,92 @@ local TOAD_MESSAGE_OPACIFYING = 2
 local TOAD_MESSAGE_FADING = 3
 local TOAD_MESSAGE_TALKING = 4
 
-local saveFile = get_current_save_file_num() - 1
+local TOAD_SUBACTION_BEFORE_REQUIREMENT = 0
+local TOAD_SUBACTION_AFTER_REQUIREMENT = 1
+local TOAD_SUBACTION_STAR_SPAWNED = 2
 
 -- Replace with a much more customizable toad system
 local toadStars = {}
----@param o Object
-local function toad_message_faded(o)
-    if (not o) then return end
-    if (o.oDistanceToMario > 700.0) then
-        o.oToadMessageRecentlyTalked = 0;
-    end
-    if (o.oToadMessageRecentlyTalked == 0 and o.oDistanceToMario < 600.0) then
-        o.oToadMessageState = TOAD_MESSAGE_OPACIFYING;
-    end
-end
 
----@param o Object
-local function toad_message_opaque(o)
-    if (not o) then return end
-    if (o.oDistanceToMario > 700.0) then
-        o.oToadMessageState = TOAD_MESSAGE_FADING;
-    elseif (o.oToadMessageRecentlyTalked == 0) then
-        o.oInteractionSubtype = INT_SUBTYPE_NPC;
-        if (o.oInteractStatus & INT_STATUS_INTERACTED ~= 0) then
-            o.oInteractStatus = 0;
-            o.oToadMessageState = TOAD_MESSAGE_TALKING;
-            play_toads_jingle();
-        end
-    end
-end
-
----@param o Object
-local function toad_message_talking(o)
-    if (not o) then return end
-    local dialogId = (o.oBehParams >> 24) & 0xFF;
-    if toadStars[dialogId] ~= nil then
-        djui_chat_message_create(tostring(toadStars[dialogId].starRequirement()))
-        if toadStars[dialogId].starRequirement() then
-            bhv_spawn_star_no_level_exit(gMarioStates[0].marioObj, toadStars[dialogId].starID, 1);
-            local collectedStar = save_file_get_star_flags(saveFile, gNetworkPlayers[0].currCourseNum - 1) & (1 << (toadStars[dialogId].starID)) ~= 0
-            o.oToadMessageDialogId = collectedStar and toadStars[dialogId].afterDialog or toadStars[dialogId].requirementsDialog
-        end
-    end
-end
-
----@param o Object
-local function toad_message_opacifying(o)
-    if (not o) then return end
-    o.oOpacity = o.oOpacity + 6 
-    if (o.oOpacity == 255) then
-        o.oToadMessageState = TOAD_MESSAGE_OPAQUE;
-    end
-end
-
----@param o Object
-local function toad_message_fading(o)
-    if (not o) then return end
-    o.oOpacity = o.oOpacity - 6 
-    if (o.oOpacity == 81) then
-        o.oToadMessageState = TOAD_MESSAGE_FADED;
-    end
-end
+-- Don't let the game use these
+gBehaviorValues.ToadStar1Requirement = 0xFFFF
+gBehaviorValues.ToadStar2Requirement = 0xFFFF
+gBehaviorValues.ToadStar3Requirement = 0xFFFF
+gBehaviorValues.dialogs.ToadStar1Dialog = 0xFFFF
+gBehaviorValues.dialogs.ToadStar2Dialog = 0xFFFF
+gBehaviorValues.dialogs.ToadStar3Dialog = 0xFFFF
+gBehaviorValues.dialogs.ToadStar1AfterDialog = 0xFFFF
+gBehaviorValues.dialogs.ToadStar2AfterDialog = 0xFFFF
+gBehaviorValues.dialogs.ToadStar3AfterDialog = 0xFFFF
 
 function bhv_custom_toad_message_init(o)
-    if (not o) then return end
-    local dialogId = (o.oBehParams >> 24) & 0xFF;
-    local spawnRequirement = true;
-    local starRequirement = true;
+    local dialogId = (o.oBehParams >> 24) & 0xFF
+    local toadData = toadStars[dialogId]
 
-    if toadStars[dialogId] ~= nil then
-        if toadStars[dialogId].spawnRequirement ~= nil then
-            spawnRequirement = toadStars[dialogId].spawnRequirement()
+    if toadData then
+
+        -- Delete toad if spawn requirement is not met
+        if toadData.spawnRequirement ~= nil and not toadData.spawnRequirement() then
+            obj_mark_for_deletion(o)
         end
-        local collectedStar = save_file_get_star_flags(saveFile, gNetworkPlayers[0].currCourseNum - 1) & (1 << (toadStars[dialogId].starID)) ~= 0
+
+        -- Check if star is already collected
+        -- If so, skip directly to dialog after star
+        local saveFile = get_current_save_file_num() - 1
+        local collectedStar = save_file_get_star_flags(saveFile, gNetworkPlayers[0].currCourseNum - 1) & (1 << (toadData.starID)) ~= 0
         if collectedStar then
-            dialogId = toadStars[dialogId].afterDialogId or o.oToadMessageDialogId;
+            dialogId = toadData.afterDialogId or o.oToadMessageDialogId
+            o.oSubAction = TOAD_SUBACTION_STAR_SPAWNED
+        else
+            o.oSubAction = TOAD_SUBACTION_BEFORE_REQUIREMENT
         end
     end
 
-    if (spawnRequirement) then -- typically star requirement
-        o.oToadMessageDialogId = dialogId;
-        o.oToadMessageRecentlyTalked = 0;
-        o.oToadMessageState = TOAD_MESSAGE_FADED;
-        o.oOpacity = 81;
-    else
-        obj_mark_for_deletion(o);
-    end
+    o.oToadMessageDialogId = dialogId
+    o.oToadMessageRecentlyTalked = 0
+    o.oToadMessageState = TOAD_MESSAGE_FADED
+    o.oOpacity = 81
 end
 
 function bhv_custom_toad_message_loop(o)
-    if (not o) then return end
-    if (o.header.gfx.node.flags & GRAPH_RENDER_ACTIVE ~= 0) then
-        o.oInteractionSubtype = 0;
-        if o.oToadMessageState == TOAD_MESSAGE_FADED then
-            toad_message_faded(o);
-        elseif o.oToadMessageState == TOAD_MESSAGE_OPAQUE then
-            toad_message_opaque(o);
-        elseif o.oToadMessageState == TOAD_MESSAGE_OPACIFYING then
-            toad_message_opacifying(o);
-        elseif o.oToadMessageState == TOAD_MESSAGE_FADING then
-            toad_message_fading(o);
-        elseif o.oToadMessageState == TOAD_MESSAGE_TALKING then
-            toad_message_talking(o);
+    local dialogId = (o.oBehParams >> 24) & 0xFF
+    local toadData = toadStars[dialogId]
+    local requirementDialogId = toadData and toadData.requirementDialogId or dialogId
+
+    if toadData then
+
+        -- Check requirement
+        if o.oToadMessageState == TOAD_MESSAGE_TALKING and o.oSubAction ~= TOAD_SUBACTION_STAR_SPAWNED then
+
+            -- Passed requirement?
+            if not toadData.starRequirement or toadData.starRequirement() then
+                o.oSubAction = TOAD_SUBACTION_AFTER_REQUIREMENT
+            else
+                o.oSubAction = TOAD_SUBACTION_BEFORE_REQUIREMENT
+            end
+        end
+
+        -- Update dialog
+        if o.oSubAction == TOAD_SUBACTION_STAR_SPAWNED then
+            o.oToadMessageDialogId = toadData.afterDialogId or dialogId
+        elseif o.oSubAction == TOAD_SUBACTION_AFTER_REQUIREMENT then
+            o.oToadMessageDialogId = toadData.requirementDialogId or dialogId
+        else
+            o.oToadMessageDialogId = dialogId
         end
     end
-    djui_chat_message_create(tostring(o.oToadMessageState))
+
+    -- Update Toad
+    bhv_toad_message_loop()
+
+    if toadData then
+
+        -- Check spawn star
+        if o.oToadMessageState == TOAD_MESSAGE_FADING and o.oToadMessageRecentlyTalked == 1 and o.oSubAction == TOAD_SUBACTION_AFTER_REQUIREMENT then
+            bhv_spawn_star_no_level_exit(gMarioStates[0].marioObj, toadData.starID, 1)
+            o.oSubAction = TOAD_SUBACTION_STAR_SPAWNED
+        end
+    end
 end
 
 ---@param dialogId integer The dialog ID that the toad spawns with

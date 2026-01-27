@@ -71,4 +71,4 @@ should be more stars\
 somewhere around...")
 
 -- Captain Toad Requirement
-add_toad_star_spawn(DIALOG_082, 2, nil, function() return gMarioStates[0].health < 0x600 end, DIALOG_068, DIALOG_154)
+add_toad_star_spawn(DIALOG_082, 2, nil, nil, DIALOG_068, DIALOG_154)
