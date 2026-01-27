@@ -1,0 +1,9 @@
+extern const GeoLayout lava_rock_platform_geo[];
+extern Lights1 lava_rock_platform_lava_rock_lights;
+extern u8 lava_rock_platform_lava_rock_rgba16[];
+extern Vtx lava_rock_platform_lava_rock_platform_mesh_layer_1_vtx_cull[8];
+extern Vtx lava_rock_platform_lava_rock_platform_mesh_layer_1_vtx_0[18];
+extern Gfx lava_rock_platform_lava_rock_platform_mesh_layer_1_tri_0[];
+extern Gfx mat_lava_rock_platform_lava_rock[];
+extern Gfx mat_revert_lava_rock_platform_lava_rock[];
+extern Gfx lava_rock_platform_lava_rock_platform_mesh_layer_1[];

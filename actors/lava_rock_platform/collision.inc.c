@@ -1,0 +1,21 @@
+const Collision lava_rock_platform_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(6),
+	COL_VERTEX(39, -697, -158),
+	COL_VERTEX(-136, 0, 90),
+	COL_VERTEX(39, 0, -158),
+	COL_VERTEX(95, -697, 115),
+	COL_VERTEX(-136, -697, 90),
+	COL_VERTEX(95, 0, 115),
+	COL_TRI_INIT(SURFACE_DEFAULT, 8),
+	COL_TRI(0, 1, 2),
+	COL_TRI(3, 4, 0),
+	COL_TRI(5, 2, 1),
+	COL_TRI(5, 0, 2),
+	COL_TRI(4, 5, 1),
+	COL_TRI(0, 4, 1),
+	COL_TRI(5, 3, 0),
+	COL_TRI(4, 3, 5),
+	COL_TRI_STOP(),
+	COL_END()
+};
