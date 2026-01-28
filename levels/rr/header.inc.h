@@ -43,7 +43,7 @@ extern Vtx rr_dl_Level_mesh_layer_1_vtx_2[365];
 extern Gfx rr_dl_Level_mesh_layer_1_tri_2[];
 extern Vtx rr_dl_Level_mesh_layer_1_vtx_3[134];
 extern Gfx rr_dl_Level_mesh_layer_1_tri_3[];
-extern Vtx rr_dl_Level_mesh_layer_1_vtx_4[224];
+extern Vtx rr_dl_Level_mesh_layer_1_vtx_4[245];
 extern Gfx rr_dl_Level_mesh_layer_1_tri_4[];
 extern Vtx rr_dl_Level_mesh_layer_1_vtx_5[40];
 extern Gfx rr_dl_Level_mesh_layer_1_tri_5[];
