@@ -9,8 +9,8 @@ add_level_data({
         "QUICK TIME BOX SWITCH",
         "WALL KICKS ARE REQUIRED",
         "RED COINS ABOVE THE CLOUDS",
-        "CLEAR CAVE 2",
-        "CLEAR CAVE 3"
+        "STAR WITHIN THE STONE TOWER",
+        "WIP STAR"
     },
 })
 
