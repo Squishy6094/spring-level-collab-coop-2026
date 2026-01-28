@@ -166,7 +166,7 @@ const LevelScript level_rr_entry[] = {
 		OBJECT(MODEL_NONE, -3700, -2499, -1005, 0, 90, 0, 0x00010000, id_bhvWarp),
 		TERRAIN(rr_area_2_collision),
 		MACRO_OBJECTS(rr_area_2_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_UNDERGROUND),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_EVENT_MERRY_GO_ROUND),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
