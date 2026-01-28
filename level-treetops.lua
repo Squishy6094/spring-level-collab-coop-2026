@@ -4,7 +4,7 @@ add_level_data({
     id = LEVEL_TTM,
     hubPos = {x = 0, y = 700, z = -1000},
     painting = 0,
-    music = 0,
+    music = create_streamed_sequence(SEQ_EVENT_PEACH_MESSAGE, "saul_song.ogg", {0*16000, 120.105*16000}, true, 1, 5), --unused song for saul game 3d, also temporary, loops awfully
 })
 
 local PlatformPath = { -- from levels\ttm\area_1\spline.inc.c
