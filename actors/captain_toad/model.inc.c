@@ -34,10 +34,6 @@ Lights1 captain_toad_skin_lights = gdSPDefLights1(
 	0x7F, 0x6A, 0x50,
 	0xFE, 0xD5, 0xA1, 0x28, 0x28, 0x28);
 
-Lights1 captain_toad_skin_2_layer1_lights = gdSPDefLights1(
-	0x7F, 0x6A, 0x50,
-	0xFE, 0xD5, 0xA1, 0x28, 0x28, 0x28);
-
 Texture captain_toad_toad_head_rgba16[] = {
 	#include "actors/captain_toad/toad_head.rgba16.inc.c"
 };
@@ -2194,23 +2190,6 @@ Gfx mat_revert_captain_toad_skin[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_captain_toad_skin_2_layer1[] = {
-	gsSPSetLights1(captain_toad_skin_2_layer1_lights),
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
-	gsDPSetAlphaDither(G_AD_NOISE),
-	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_revert_captain_toad_skin_2_layer1[] = {
-	gsDPPipeSync(),
-	gsDPSetAlphaDither(G_AD_DISABLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
-	gsSPEndDisplayList(),
-};
-
 Gfx captain_toad_000_offset_003_mesh_layer_1[] = {
 	gsSPDisplayList(mat_captain_toad_cap_spots),
 	gsSPDisplayList(captain_toad_000_offset_003_mesh_layer_1_tri_0),
@@ -2277,9 +2256,9 @@ Gfx captain_toad_000_offset_011_mesh_layer_1[] = {
 };
 
 Gfx captain_toad_000_offset_013_mesh_layer_1[] = {
-	gsSPDisplayList(mat_captain_toad_skin_2_layer1),
+	gsSPDisplayList(mat_captain_toad_skin),
 	gsSPDisplayList(captain_toad_000_offset_013_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_captain_toad_skin_2_layer1),
+	gsSPDisplayList(mat_revert_captain_toad_skin),
 	gsSPEndDisplayList(),
 };
 
