@@ -18,3 +18,7 @@ Texture lll_dl_lava_rock_rgba16[] = {
 	#include "levels/lll/lava_rock.rgba16.inc.c"
 };
 
+Texture lll_dl_darker_inside_rock_rgba16[] = {
+	#include "levels/lll/darker_inside_rock.rgba16.inc.c"
+};
+
