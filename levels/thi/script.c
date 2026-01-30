@@ -93,7 +93,7 @@ const LevelScript level_thi_entry[] = {
 		WARP_NODE(0xF0, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_CASTLE_GROUNDS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x97, LEVEL_THI, 0x01, 0x96, WARP_NO_CHECKPOINT),
-		OBJECT(E_MODEL_BIG_CHILL_BULLY, 2810, 5445, -361, 0, 56, 0, (4 << 24) | (4 << 16) | (4 << 8), id_bhvBigChillBully),
+		OBJECT(E_MODEL_BIG_CHILL_BULLY, 2810, 5906, -361, 0, 56, 0, (4 << 24) | (4 << 16) | (4 << 8), id_bhvBigChillBully),
 		OBJECT(E_MODEL_CHILL_BULLY, 3449, 5445, -1098, 0, 56, 0, (4 << 24) | (4 << 16) | (4 << 8), id_bhvSmallChillBully),
 		OBJECT(E_MODEL_CHILL_BULLY, 2080, 5445, -526, 0, 56, 0, (4 << 24) | (4 << 16) | (4 << 8), id_bhvSmallChillBully),
 		OBJECT(E_MODEL_CHILL_BULLY, 3389, 5445, 414, 0, 56, 0, (4 << 24) | (4 << 16) | (4 << 8), id_bhvSmallChillBully),
