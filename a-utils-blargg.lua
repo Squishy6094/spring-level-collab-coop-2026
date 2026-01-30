@@ -15,9 +15,6 @@ local function switch(param, case_table)
     return def and def() or nil
 end
 
-local string_pack = string.pack
-local string_unpack = string.unpack
-
 ---@param parent Object
 ---@param model ModelExtendedId
 ---@param behaviorId BehaviorId
@@ -91,8 +88,9 @@ end
 ---@param obj Object
 ---@param m MarioState
 local function blargg_act_swim(obj, m)
+    cur_obj_init_animation(ANM_swim)
     obj.oForwardVel = 5.0
-    if obj_return_home_if_safe(obj, obj.oHomeX, obj.oPosY, obj.oHomeZ, 800) == 1 and gMarioStates[0].floor.type ~= SURFACE_DEFAULT then
+    if obj_return_home_if_safe(obj, obj.oHomeX, obj.oPosY, obj.oHomeZ, 800) ~= 0 and m.floor.type ~= SURFACE_DEFAULT then
         obj.oAction = BLARGG_ACT_CHASE
     end
 end
@@ -115,9 +113,8 @@ local function blargg_act_chase_mario(obj, m)
 
     bhv_koopa_shell_flame_spawn(obj)
     -- If Mario is too far or is no longer on lava, start swimming
-    if is_point_within_radius_of_mario(homeX, posY, homeZ, 5000) == 0 or gMarioStates[0].floor.type == SURFACE_DEFAULT then
+    if is_point_within_radius_of_mario(homeX, posY, homeZ, 5000) == 0 or m.floor.type == SURFACE_DEFAULT then
         obj.oAction = BLARGG_ACT_SWIM
-        cur_obj_init_animation(ANM_swim)
     end
 end
 
@@ -126,57 +123,53 @@ end
 ---@param m MarioState
 local function blargg_act_knockback(obj, m)
     -- Only activate during BLARGG_ACT_SWIM, it appears
-    if obj.oForwardVel < 10.0 and math.s32(obj.oVelY) == 0 then
-        obj.oForwardVel = 1.0
-        obj.oBullyKBTimerAndMinionKOCounter = obj.oBullyKBTimerAndMinionKOCounter + 1
-        obj.oFlags = obj.oFlags | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW
-        obj.oMoveAngleYaw = obj.oFaceAngleYaw
-        obj_turn_toward_object(obj, m.marioObj, 16, 1280)
-    else
-        -- ! Changed from curAnim to animInfo
-        obj.header.gfx.animInfo.animFrame = 0
-    end
+    obj.oForwardVel = 1.0
+    obj.oFlags = obj.oFlags | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW
+    obj.oMoveAngleYaw = obj.oFaceAngleYaw
+    obj_turn_toward_object(obj, m.marioObj, 16, 1280)
+    cur_obj_init_animation(ANM_attack)
 
     -- After some time, start chasing again
-    if obj.oBullyKBTimerAndMinionKOCounter == 18 then
+    if obj.header.gfx.animInfo.animFrame >= obj.header.gfx.animInfo.curAnim.loopEnd - 1 then
         obj.oAction = BLARGG_ACT_CHASE
-        obj.oBullyKBTimerAndMinionKOCounter = 0
-        cur_obj_init_animation(ANM_attack)
         cur_obj_play_sound_2(SOUND_OBJ2_PIRANHA_PLANT_BITE)
     end
 end
 
 ---@param obj Object
 local function blargg_act_back_up(obj)
-    if obj.oTimer == 0 then
-        obj.oFlags = obj.oFlags & ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW
-        obj.oMoveAngleYaw = obj.oMoveAngleYaw + 0x8000
+    if obj.oTimer == 1 then
+        obj.oMoveAngleYaw = math.s16(obj.oMoveAngleYaw + 0x8000)
+        obj.oFaceAngleYaw = obj.oMoveAngleYaw
     end
-
-    obj.oForwardVel = 5.0
-
-    if obj.oTimer == 15 then
-        obj.oMoveAngleYaw = obj.oFaceAngleYaw
-        obj.oFlags = obj.oFlags | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW
+    obj.oForwardVel = 10
+    if obj.oTimer >= 15 then
         obj.oAction = BLARGG_ACT_SWIM
     end
 end
 
+---@param obj Object
+---@param collisionFlags integer
 local function blargg_backup_check(obj, collisionFlags)
-    if collisionFlags & OBJ_COL_FLAG_NO_Y_VEL == 0 and obj.oAction ~= BLARGG_ACT_KNOCKBACK then
+    if collisionFlags & OBJ_COL_FLAG_NO_Y_VEL == 0 and obj.oAction ~= BLARGG_ACT_BACKUP then
         obj.oPosX = obj.oBullyPrevX
+        obj.oPosY = obj.oBullyPrevY
         obj.oPosZ = obj.oBullyPrevZ
         obj.oAction = BLARGG_ACT_BACKUP
     end
 end
 
 ---@param obj Object
-local function blargg_step(obj)
+---@param in_backup boolean
+local function blargg_step(obj, in_backup)
     local collisionFlags = 0
     collisionFlags = object_step()
-    -- Possibly back up upon hitting a wall
-    blargg_backup_check(obj, collisionFlags)
+    -- Back up once blargg has reached the edge of a platform
+    if not in_backup then
+        blargg_backup_check(obj, collisionFlags)
+    end
 end
+
 
 ---@param obj Object
 function bhv_blargg_init(obj)
@@ -185,7 +178,7 @@ function bhv_blargg_init(obj)
     obj.oFlags = OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
     obj_set_model_extended(obj, E_MODEL_BLARGG)
     obj.oGravity = 4.0
-    obj.oFriction = 1.0
+    obj.oFriction = 1.8
     obj.oIntangibleTimer = 0
     obj.oBuoyancy = 1.3
     obj.oHomeX = obj.oPosX
@@ -198,32 +191,31 @@ end
 ---@param obj Object
 function bhv_blargg_loop(obj)
     obj.oIntangibleTimer = 0
-    
+
     obj.oBullyPrevX = obj.oPosX
     obj.oBullyPrevY = obj.oPosY
     obj.oBullyPrevZ = obj.oPosZ
     blargg_check_mario_collision(obj)
 
     ---@type MarioState
-    local m = gMarioStates[0]
+    local m = nearest_mario_state_to_object(obj)
     -- In this case, since there's a lot of possible states, a switch is faster
     switch (obj.oAction, {
         [BLARGG_ACT_SWIM] = function ()
             blargg_act_swim(obj, m)
-            blargg_step(obj)
+            blargg_step(obj, false)
         end,
         [BLARGG_ACT_CHASE] = function ()
             blargg_act_chase_mario(obj, m)
-            blargg_step(obj)
+            blargg_step(obj, false)
         end,
         [BLARGG_ACT_KNOCKBACK] = function ()
             blargg_act_knockback(obj, m)
-            blargg_step(obj)
+            blargg_step(obj, false)
         end,
         [BLARGG_ACT_BACKUP] = function ()
-            obj.oForwardVel = 10.0
             blargg_act_back_up(obj)
-            blargg_step(obj)
+            blargg_step(obj, true)
         end,
         [BULLY_ACT_DEATH_PLANE_DEATH] = function ()
             obj.activeFlags = ACTIVE_FLAG_DEACTIVATED
@@ -232,3 +224,13 @@ function bhv_blargg_loop(obj)
 end
 
 id_bhvBlargg = hook_behavior(nil, OBJ_LIST_GENACTOR, false, bhv_blargg_init, bhv_blargg_loop, "bhvBlargg")
+
+local function mario_update(m)
+    if m.playerIndex ~= 0 then return end
+
+    if m.controller.buttonPressed & X_BUTTON ~= 0 then
+        spawn_sync_object(id_bhvBlargg, E_MODEL_BLARGG, m.pos.x, m.pos.y, m.pos.z, nil)
+    end
+end
+
+hook_event(HOOK_MARIO_UPDATE, mario_update)

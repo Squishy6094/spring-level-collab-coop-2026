@@ -1,0 +1,9 @@
+extern const GeoLayout basic_rock_platform_mini_geo[];
+extern Lights1 basic_rock_platform_mini_basic_rock_lights;
+extern u8 basic_rock_platform_mini_darker_inside_rock_rgba16[];
+extern Vtx basic_rock_platform_mini_basic_rock_platform_mesh_layer_1_vtx_cull[8];
+extern Vtx basic_rock_platform_mini_basic_rock_platform_mesh_layer_1_vtx_0[24];
+extern Gfx basic_rock_platform_mini_basic_rock_platform_mesh_layer_1_tri_0[];
+extern Gfx mat_basic_rock_platform_mini_basic_rock[];
+extern Gfx mat_revert_basic_rock_platform_mini_basic_rock[];
+extern Gfx basic_rock_platform_mini_basic_rock_platform_mesh_layer_1[];
