@@ -15,10 +15,9 @@ create_streamed_sequence(SEQ_LEVEL_INSIDE_CASTLE, "music-eshop-2014.ogg", {12.12
 add_level_data({
     name = "Out Pikmin the Hut",
     creator = "#JOBFIRED",
-    --id = LEVEL_CASTLE_GROUNDS,
     painting = 0,
     color = {r = 255, g = 255, b = 50},
-    hubPos = {x = -3600, y = 200, z = 2100}
+    hubPos = {x = -3650, y = 200, z = 1600}
 })
 
 smlua_text_utils_dialog_replace(DIALOG_001, 1, 6, 95, 200,
