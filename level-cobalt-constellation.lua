@@ -2,7 +2,7 @@ add_level_data({
     name = "Cobalt Constellation",
     creator = "KaylanVT",
     id = LEVEL_DDD,
-    hubPos = {x = 0, y = 600, z = 900},
+    hubPos = {x = -900, y = 600, z = 600},
     painting = 0,
     stars = {
         "CAPTAIN TOAD'S LOST SHIP",
