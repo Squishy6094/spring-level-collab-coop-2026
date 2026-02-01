@@ -9,3 +9,4 @@ create_streamed_sequence(SEQ_LEVEL_SNOW, "music-cold-cliffs.ogg", {0*16000, 128*
 
 E_MODEL_TODD = smlua_model_util_get_id("largeconcretemistake_geo")
 E_MODEL_TREEE = smlua_model_util_get_id("charlotetree_geo")
+E_MODEL_SNOBOMB = smlua_model_util_get_id("snowbomb_geo")
