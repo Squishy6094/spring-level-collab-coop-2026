@@ -1,3 +1,5 @@
+--Level Utility
+--#region
 add_level_data({
     name = "Cobalt Constellation",
     creator = "KaylanVT",
@@ -15,7 +17,10 @@ add_level_data({
 })
 
 create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", {5.27*46000, 67.25*46000}, true, 1, 3)
+--#endregion
 
+--Custom Skybox
+--#region
 E_MODEL_COBALT_SKYBOX = smlua_model_util_get_id("cobalt_skybox_geo")
 
 -- Behavior
@@ -45,3 +50,12 @@ function SpawnSkybox()
 end
 
 hook_event(HOOK_ON_LEVEL_INIT, SpawnSkybox)
+--#endregion
+
+--Question Coin and Rainbow Note Star
+--#region
+E_MODEL_QUESTION_COIN = smlua_model_util_get_id("question_coin_geo")
+E_MODEL_RAINBOW_NOTE = smlua_model_util_get_id("rainbow_note_geo")
+
+
+--#endregion

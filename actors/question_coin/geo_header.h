@@ -1,0 +1,17 @@
+extern const GeoLayout question_coin_geo[];
+extern u8 question_coin_gold_ci8[];
+extern u8 question_coin_gold_pal_rgba16[];
+extern u8 question_coin_Question_Mark_ci4[];
+extern u8 question_coin_Question_Mark_pal_rgba16[];
+extern Vtx question_coin___Coin_mesh_layer_1_vtx_cull[8];
+extern Vtx question_coin___Coin_mesh_layer_1_vtx_0[117];
+extern Gfx question_coin___Coin_mesh_layer_1_tri_0[];
+extern Vtx question_coin___Coin_mesh_layer_5_vtx_cull[8];
+extern Vtx question_coin___Coin_mesh_layer_5_vtx_0[18];
+extern Gfx question_coin___Coin_mesh_layer_5_tri_0[];
+extern Gfx mat_question_coin_Coin_Face[];
+extern Gfx mat_revert_question_coin_Coin_Face[];
+extern Gfx mat_question_coin_Question_Mark[];
+extern Gfx mat_revert_question_coin_Question_Mark[];
+extern Gfx question_coin___Coin_mesh_layer_1[];
+extern Gfx question_coin___Coin_mesh_layer_5[];
