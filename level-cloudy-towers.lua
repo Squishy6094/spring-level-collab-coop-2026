@@ -11,7 +11,7 @@ add_level_data({
         "WALL KICKS ARE REQUIRED",
         "RED COINS ABOVE THE CLOUDS",
         "STAR WITHIN THE STONE TOWER",
-        "WING X OVER THE SKY RUINS"
+        "WING [X] AT THE TOP OF THE PILLAR"
     },
 })
 

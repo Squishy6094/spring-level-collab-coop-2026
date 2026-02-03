@@ -85,7 +85,7 @@ extern Vtx rr_dl_Level_002_mesh_layer_1_vtx_0[50];
 extern Gfx rr_dl_Level_002_mesh_layer_1_tri_0[];
 extern Vtx rr_dl_Level_002_mesh_layer_1_vtx_1[40];
 extern Gfx rr_dl_Level_002_mesh_layer_1_tri_1[];
-extern Vtx rr_dl_Level_002_mesh_layer_1_vtx_2[290];
+extern Vtx rr_dl_Level_002_mesh_layer_1_vtx_2[590];
 extern Gfx rr_dl_Level_002_mesh_layer_1_tri_2[];
 extern Gfx mat_rr_dl_Clouds[];
 extern Gfx mat_revert_rr_dl_Clouds[];
