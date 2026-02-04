@@ -28,3 +28,40 @@ const BehaviorScript bhvBlargg[] = {
         CALL_NATIVE(bhv_blargg_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvRainbowNote[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    ID(id_bhvNewId),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_rainbow_note_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rainbow_note_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvQuestionCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    ID(id_bhvNewId),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_question_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_question_coin_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvRainbowNote_StarSpawn[] = {
+BEGIN(OBJ_LIST_GENACTOR),
+ID(id_bhvNewId),
+CALL_NATIVE(bhv_rainbownote_starspawn_init),
+BEGIN_LOOP(),
+CALL_NATIVE(bhv_rainbownote_starspawn_loop),
+END_LOOP(),
+};
