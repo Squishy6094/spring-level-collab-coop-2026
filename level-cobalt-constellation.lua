@@ -3,6 +3,7 @@ add_level_data({
     name = "Cobalt Constellation",
     creator = "KaylanVT",
     id = LEVEL_DDD,
+    color = {r = 0, g = 71, b = 171},
     hubPos = { x = -900, y = 600, z = 600 },
     painting = 0,
     stars = {
@@ -14,7 +15,7 @@ add_level_data({
         --"CRAZY MASTERS OF COBALT CASTLE"
     },
 })
-create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", { 5.27 * 46000, 67.25 * 46000 }, true, 1, 3)
+create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", { 5.27 * 46000, 67.25 * 46000 }, true, 1, 2)
 
 -- Custom Skybox
 local E_MODEL_COBALT_SKYBOX = smlua_model_util_get_id("cobalt_skybox_geo")
@@ -54,17 +55,18 @@ E_MODEL_RAINBOW_NOTE = smlua_model_util_get_id("rainbow_note_geo")
 E_SOUND_QUESTION_COIN = audio_sample_load("question_coin.ogg")
 E_SOUND_RAINBOW_NOTE = audio_sample_load("rainbow_note.ogg")
 
-local RAINBOWNOTE_IDLE = 0
-local RAINBOWNOTE_ACTIVE = 1
-local RAINBOWNOTE_RESET = 2
+
+
 
 local QUESTIONCOIN_IDLE = 0
 local QUESTIONCOIN_ACTIVE = 1
-
-RAINBOWNOTE_STATE = 0
+local RAINBOWNOTE_IDLE = QUESTIONCOIN_IDLE
+local RAINBOWNOTE_ACTIVE = QUESTIONCOIN_ACTIVE
+local RAINBOWNOTE_RESET = 2
 
 local rainbowTimer = 720
-rainbowNotes = 0
+local questionInteract = false
+rainbowNotes = 1
 maxNotes = 0
 
 local RainbowNoteStarSpawned = false
@@ -136,6 +138,7 @@ function bhv_question_coin_init(obj)
     network_init_object(obj, false, {
         "oAction"
     })
+    obj.oAction = QUESTIONCOIN_IDLE
 end
 
 ---@param obj Object
@@ -153,14 +156,16 @@ function bhv_question_coin_loop(obj)
         switch(obj.oAction, {
             [QUESTIONCOIN_IDLE] = function()
                 if (obj.oInteractStatus & INT_STATUS_INTERACTED) ~= 0 then
-                    cur_obj_disable_rendering_and_become_intangible(obj)
+                    cur_obj_disable_rendering()
+                    cur_obj_become_intangible()
                     spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_golden_coin_sparkles_loop)
                     audio_sample_play(E_SOUND_QUESTION_COIN, oPos, 2.5)
+                    questionInteract = true
                     obj.oAction = QUESTIONCOIN_ACTIVE
-                    RAINBOWNOTE_STATE = 1
                     obj.oInteractStatus = 0
                 else
-                    cur_obj_enable_rendering_and_become_tangible(obj)
+                    cur_obj_enable_rendering()
+                    cur_obj_become_tangible()
                     obj.oInteractStatus = 1
                 end
             end,
@@ -173,7 +178,8 @@ function bhv_question_coin_loop(obj)
 
                 if obj.oTimer == rainbowTimer then
                     stop_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource)
-                    cur_obj_enable_rendering_and_become_tangible(obj)
+                    cur_obj_enable_rendering()
+                    cur_obj_become_tangible()
                     obj.oAction = QUESTIONCOIN_IDLE
                     obj.oInteractStatus = 1
                 end
@@ -191,6 +197,9 @@ function bhv_rainbow_note_init(obj)
         "oAction"
     })
     rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
+    obj.oAction = RAINBOWNOTE_IDLE
+    questionInteract = false
+
 end
 
 ---@param obj Object
@@ -203,39 +212,55 @@ function bhv_rainbow_note_loop(obj)
 
     obj.oFaceAngleYaw = obj.oFaceAngleYaw + 0x500
 
-
     if RainbowNoteStarSpawned then
         obj_mark_for_deletion(obj)
     else
         switch(obj.oAction, {
             [RAINBOWNOTE_IDLE] = function()
-                cur_obj_disable_rendering_and_become_intangible(obj)
-                obj.oInteractStatus = 1
-                if RAINBOWNOTE_STATE == 1 then
+                if questionInteract ~= false then
+                    cur_obj_enable_rendering()
+                    cur_obj_become_tangible()
                     obj.oAction = RAINBOWNOTE_ACTIVE
+
+                else   
+                rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
+                cur_obj_disable_rendering()
+                cur_obj_become_intangible()
+                obj.oTimer = 0
+                obj.oInteractStatus = 1
+                --[[ if obj_is_valid_for_interaction(obj) ~= true then
+                    obj.oAction = RAINBOWNOTE_ACTIVE
+                else]]
                 end
             end,
             [RAINBOWNOTE_ACTIVE] = function()
+                cur_obj_wait_then_blink(rainbowTimer - 70, 70)
+                if obj.oTimer < 2 then
+                cur_obj_enable_rendering()
+                cur_obj_become_tangible()
+            end
                 if (obj.oInteractStatus & INT_STATUS_INTERACTED) ~= 0 then
-                    cur_obj_disable_rendering_and_become_intangible(obj)
+                    cur_obj_disable_rendering()
+                    cur_obj_become_intangible()
                     spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_golden_coin_sparkles_loop)
                     audio_sample_play(E_SOUND_RAINBOW_NOTE, oPos, 1.5)
-                    obj.oInteractStatus = 0
                     rainbowNotes = rainbowNotes - 1
-                else
-                    cur_obj_enable_rendering_and_become_tangible(obj)
-                    obj.oInteractStatus = 1
+                    obj.oInteractStatus = 0
+                
                 end
 
-                if cur_obj_wait_then_blink(rainbowTimer - 70, 70) then
-                    cur_obj_disable_rendering_and_become_intangible(obj)
+                if obj.oTimer == rainbowTimer then
+                    obj.oInteractStatus = 1
+                    cur_obj_disable_rendering()
+                    cur_obj_become_intangible()
                     obj.oAction = RAINBOWNOTE_RESET
                 end
             end,
             [RAINBOWNOTE_RESET] = function()
                 rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
+                questionInteract = false
                 obj.oAction = RAINBOWNOTE_IDLE
-            end
+            end 
         })
     end
 end
@@ -247,10 +272,17 @@ end)
 ---@param obj Object
 function bhv_rainbownote_starspawn_init(obj)
     obj.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
+    obj.oHealth = rainbowNotes
 end
 
 ---@param obj Object
 function bhv_rainbownote_starspawn_loop(obj)
+    
+    -- Prevents the starspawn mop from prematurely assume all panels have been pressed
+    if rainbowNotes > obj.oHealth or obj.oHealth == 0 then
+        obj.oHealth = rainbowNotes
+        return
+    end
     obj.oHiddenStarTriggerCounter = 0
 
     if obj.oHiddenStarTriggerCounter == rainbowNotes and not RainbowNoteStarSpawned then
