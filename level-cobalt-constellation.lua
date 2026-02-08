@@ -11,13 +11,14 @@ add_level_data({
         --"HOPPING ACROSS THE BROKEN RAINBOW ROAD",
         --"THE BULLY SPACE INVASION",
         --"CLIMBING UP THE COBALT CASTLE",
-        --"RED COINS/NOTES AROUND THE RINGS",
+        --"NOTES AROUND THE RINGS",
         --"CRAZY MASTERS OF COBALT CASTLE"
     },
 })
 create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", { 5.27 * 46000, 67.25 * 46000 }, true, 1, 2)
 
 -- Custom Skybox
+--#region
 local E_MODEL_COBALT_SKYBOX = smlua_model_util_get_id("cobalt_skybox_geo")
 
 -- Behavior
@@ -46,10 +47,10 @@ function SpawnSkybox()
 end
 
 hook_event(HOOK_ON_LEVEL_INIT, SpawnSkybox)
+--#endregion
 
 --Question Coin and Rainbow Note Star
-
-
+--#region
 E_MODEL_QUESTION_COIN = smlua_model_util_get_id("question_coin_geo")
 E_MODEL_RAINBOW_NOTE = smlua_model_util_get_id("rainbow_note_geo")
 E_SOUND_QUESTION_COIN = audio_sample_load("question_coin.ogg")
@@ -58,18 +59,17 @@ E_SOUND_RAINBOW_NOTE = audio_sample_load("rainbow_note.ogg")
 
 
 
-local QUESTIONCOIN_IDLE = 0
-local QUESTIONCOIN_ACTIVE = 1
-local RAINBOWNOTE_IDLE = QUESTIONCOIN_IDLE
-local RAINBOWNOTE_ACTIVE = QUESTIONCOIN_ACTIVE
-local RAINBOWNOTE_RESET = 2
+QUESTIONCOIN_IDLE = 0
+QUESTIONCOIN_ACTIVE = 1
+RAINBOWNOTE_IDLE = QUESTIONCOIN_IDLE
+RAINBOWNOTE_ACTIVE = QUESTIONCOIN_ACTIVE
+RAINBOWNOTE_RESET = 2
 
-local rainbowTimer = 720
-local questionInteract = false
+rainbowTimer = 720
+questionInteract = false
 rainbowNotes = 1
-maxNotes = 0
 
-local RainbowNoteStarSpawned = false
+RainbowNoteStarSpawned = false
 
 ---@param param any
 ---@param case_table table<any, function>
@@ -307,3 +307,82 @@ id_bhvQuestionCoin = hook_behavior(nil, OBJ_LIST_LEVEL, false, bhv_question_coin
     "bhvQuestionCoin")
 id_bhvRainbownote = hook_behavior(nil, OBJ_LIST_LEVEL, false, bhv_rainbow_note_init, bhv_rainbow_note_loop,
     "bhvRainbownote")
+--#endregion
+
+-- Dialogue Replacements & Toad Star
+--#region
+--[[Dialogue currently in use as of writing: 001, 002, 097, 016, 068, 082, 154, 008,
+                               018, 019, 078, 151, 168, 152
+    Starting Dialogue Defines I'll use at 120 (Unused)]]
+
+E_MODEL_BRIGADE_BLUE = smlua_model_util_get_id("brigade_member_blue_geo")
+E_MODEL_BRIGADE_YELLOW = smlua_model_util_get_id("brigade_member_yellow_geo")
+
+-- Blue Toad Dialogue
+smlua_text_utils_dialog_replace(DIALOG_120, 1, 6, 30, 200,
+"Oh! Am I SO glad\
+to see you!\
+\
+\
+\
+Can you help us?\
+We were searching for\
+the captain when we\
+were hit and crashed here.\
+Those Bullies shot us down\
+and are making a mess of\
+everything around here!\
+They've destroyed Rainbow\
+Road and a planet's rings\
+with cannonballs.\
+\
+\
+Please be careful!\
+I think the Bullies are\
+planning on taking over\
+that castle over there!\
+\
+\
+Hey! I know!\
+Here take this star!\
+\
+I know its something the\
+captain would do...\
+It's better in your hands\
+than in ours anyway.\
+I'm positive that it will\
+help against those mean\
+Bullies!")
+
+smlua_text_utils_dialog_replace(DIALOG_121, 1, 5, 30, 200,
+"I have to do my best\
+to fix the starship.\
+...\
+...\
+...\
+...\
+...\
+...\
+... I hope the captain\
+is ok... I'm worried...")
+
+-- Blue Toad Star
+add_toad_star_spawn(DIALOG_120, 5, nil, nil, nil, DIALOG_121)
+
+-- Yellow Toad Dialogue
+
+smlua_text_utils_dialog_replace(DIALOG_122, 1, 6, 30, 200,
+"We lost a lot when \
+we crashed. I think Blue\
+forgot that we had a\
+passenger on board. I'm \
+going to go look for them\
+after a nap...\
+*Yawn* I hope they...\
+didn't... land in...\
+that castle...\
+It's so...\
+far... away. . .\
+... zZz... Zzz...")
+
+--#endregion

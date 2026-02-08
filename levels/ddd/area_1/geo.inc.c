@@ -3,8 +3,9 @@
 const GeoLayout ddd_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -26495, 3485, -22165, 0, 0, 29, ddd_dl_Cube_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Cube_002_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Cube_005_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 554, 0, ddd_dl_Cube_005_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 17282, 3060, 16117, 0, 0, -17, ddd_dl_Finished_Ring_Piece_002_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Level_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Rainbow_Road_mesh_layer_1),
