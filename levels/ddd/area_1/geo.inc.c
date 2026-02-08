@@ -5,9 +5,11 @@ const GeoLayout ddd_area_1_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Cube_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Cube_005_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 17282, 3060, 16117, 0, 0, -17, ddd_dl_Finished_Ring_Piece_002_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Level_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Rainbow_Road_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Rainbow_Road_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 17322, 3060, 15919, ddd_dl_Sphere_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -35,6 +37,7 @@ const GeoLayout ddd_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ddd_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
