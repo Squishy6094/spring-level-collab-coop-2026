@@ -7,12 +7,12 @@ add_level_data({
     hubPos = { x = -900, y = 600, z = 600 },
     painting = 0,
     stars = {
-        --"CAPTAIN TOAD'S LOST SHIP",
-        --"HOPPING ACROSS THE BROKEN RAINBOW ROAD",
-        --"THE BULLY SPACE INVASION",
-        --"CLIMBING UP THE COBALT CASTLE",
-        --"NOTES AROUND THE RINGS",
-        --"CRAZY MASTERS OF COBALT CASTLE"
+        "CAPTAIN TOAD'S LOST SHIP",
+        "HOPPING ACROSS THE BROKEN RAINBOW ROAD",
+        "THE BULLY SPACE INVASION",
+        "CLIMBING UP THE COBALT CASTLE",
+        "NOTES AROUND THE RINGS",
+        "CONSTELLATION'S RED COINS"
     },
 })
 create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", { 5.27 * 46000, 67.25 * 46000 }, true, 1, 2)
@@ -90,8 +90,8 @@ sRainbowNoteHitbox = {
     damageOrCoinValue = 0,
     health            = 0,
     numLootCoins      = 0,
-    radius            = 100,
-    height            = 60,
+    radius            = 80,
+    height            = 90,
     hurtboxRadius     = 0,
     hurtboxHeight     = 0,
 }
@@ -103,8 +103,8 @@ sQuestionCoinHitbox = {
     damageOrCoinValue = 0,
     health            = 0,
     numLootCoins      = 0,
-    radius            = 150,
-    height            = 100,
+    radius            = 130,
+    height            = 80,
     hurtboxRadius     = 0,
     hurtboxHeight     = 0,
 }
@@ -367,7 +367,7 @@ to fix the starship.\
 is ok... I'm worried...")
 
 -- Blue Toad Star
-add_toad_star_spawn(DIALOG_120, 5, nil, nil, nil, DIALOG_121)
+add_toad_star_spawn(DIALOG_120, 0, nil, nil, nil, DIALOG_121)
 
 -- Yellow Toad Dialogue
 
@@ -384,5 +384,23 @@ that castle...\
 It's so...\
 far... away. . .\
 ... zZz... Zzz...")
+
+--#endregion
+
+-- Simple Planet Rotation
+--#region
+E_MODEL_GAS_GIANT = smlua_model_util_get_id("gas_giant_geo")
+
+function bhv_gas_giant_init(o)
+    o.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
+    o.header.gfx.skipInViewCheck = true
+end
+
+function bhv_gas_giant_loop(o)
+    o.oFaceAngleYaw = o.oFaceAngleYaw + 0x30
+end
+
+id_bhvGasGiant = hook_behavior(bhvGasGiant, OBJ_LIST_LEVEL, false, bhv_gas_giant_init, bhv_gas_giant_loop)
+
 
 --#endregion
