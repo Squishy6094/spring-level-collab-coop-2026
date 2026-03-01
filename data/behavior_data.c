@@ -65,3 +65,18 @@ BEGIN_LOOP(),
 CALL_NATIVE(bhv_rainbownote_starspawn_loop),
 END_LOOP(),
 };
+
+
+const BehaviorScript bhvGasGiant[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    ID(id_bhvNewId),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_gas_giant_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gas_giant_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};

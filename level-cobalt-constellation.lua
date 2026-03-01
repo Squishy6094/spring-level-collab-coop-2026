@@ -7,12 +7,12 @@ add_level_data({
     hubPos = { x = -900, y = 600, z = 600 },
     painting = 0,
     stars = {
-        --"CAPTAIN TOAD'S LOST SHIP",
-        --"HOPPING ACROSS THE BROKEN RAINBOW ROAD",
-        --"THE BULLY SPACE INVASION",
-        --"CLIMBING UP THE COBALT CASTLE",
-        --"NOTES AROUND THE RINGS",
-        --"CRAZY MASTERS OF COBALT CASTLE"
+        "CAPTAIN TOAD'S LOST SHIP",
+        "HOPPING ACROSS THE BROKEN RAINBOW ROAD",
+        "THE BULLY SPACE INVASION",
+        "CLIMBING UP THE COBALT CASTLE",
+        "NOTES AROUND THE RINGS",
+        "CONSTELLATION'S RED COINS"
     },
 })
 create_streamed_sequence(SEQ_LEVEL_WATER, "music-cobalt-constellation.ogg", { 5.27 * 46000, 67.25 * 46000 }, true, 1, 2)
@@ -90,8 +90,8 @@ sRainbowNoteHitbox = {
     damageOrCoinValue = 0,
     health            = 0,
     numLootCoins      = 0,
-    radius            = 100,
-    height            = 60,
+    radius            = 80,
+    height            = 90,
     hurtboxRadius     = 0,
     hurtboxHeight     = 0,
 }
@@ -103,8 +103,8 @@ sQuestionCoinHitbox = {
     damageOrCoinValue = 0,
     health            = 0,
     numLootCoins      = 0,
-    radius            = 150,
-    height            = 100,
+    radius            = 130,
+    height            = 80,
     hurtboxRadius     = 0,
     hurtboxHeight     = 0,
 }
@@ -156,10 +156,10 @@ function bhv_question_coin_loop(obj)
         switch(obj.oAction, {
             [QUESTIONCOIN_IDLE] = function()
                 if (obj.oInteractStatus & INT_STATUS_INTERACTED) ~= 0 then
+                    spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_question_coin_loop)
+                    audio_sample_play(E_SOUND_QUESTION_COIN, oPos, 2.5)
                     cur_obj_disable_rendering()
                     cur_obj_become_intangible()
-                    spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_golden_coin_sparkles_loop)
-                    audio_sample_play(E_SOUND_QUESTION_COIN, oPos, 2.5)
                     questionInteract = true
                     obj.oAction = QUESTIONCOIN_ACTIVE
                     obj.oInteractStatus = 0
@@ -236,14 +236,14 @@ function bhv_rainbow_note_loop(obj)
             [RAINBOWNOTE_ACTIVE] = function()
                 cur_obj_wait_then_blink(rainbowTimer - 70, 70)
                 if obj.oTimer < 2 then
-                cur_obj_enable_rendering()
-                cur_obj_become_tangible()
-            end
+                    cur_obj_enable_rendering()
+                    cur_obj_become_tangible()
+                end
                 if (obj.oInteractStatus & INT_STATUS_INTERACTED) ~= 0 then
+                    spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_rainbow_note_loop)
+                    audio_sample_play(E_SOUND_RAINBOW_NOTE, oPos, 1.5)
                     cur_obj_disable_rendering()
                     cur_obj_become_intangible()
-                    spawn_sync_object(id_bhvGoldenCoinSparkles, E_MODEL_SPARKLES, obj.oPosX, obj.oPosY, obj.oPosZ, bhv_golden_coin_sparkles_loop)
-                    audio_sample_play(E_SOUND_RAINBOW_NOTE, oPos, 1.5)
                     rainbowNotes = rainbowNotes - 1
                     obj.oInteractStatus = 0
                 
@@ -265,27 +265,24 @@ function bhv_rainbow_note_loop(obj)
     end
 end
 
-hook_event(HOOK_ON_LEVEL_INIT, function()
-    RainbowNoteStarSpawned = false
-end)
+
 
 ---@param obj Object
 function bhv_rainbownote_starspawn_init(obj)
     obj.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
     obj.oHealth = rainbowNotes
+    RainbowNoteStarSpawned = false
 end
 
 ---@param obj Object
 function bhv_rainbownote_starspawn_loop(obj)
-    
-    -- Prevents the starspawn mop from prematurely assume all panels have been pressed
-    if rainbowNotes > obj.oHealth or obj.oHealth == 0 then
-        obj.oHealth = rainbowNotes
-        return
-    end
+
+
+    obj.oHealth = rainbowNotes
+
     obj.oHiddenStarTriggerCounter = 0
 
-    if obj.oHiddenStarTriggerCounter == rainbowNotes and not RainbowNoteStarSpawned then
+    if obj.oHiddenStarTriggerCounter == obj.oHealth and not RainbowNoteStarSpawned then
         spawn_red_coin_cutscene_star(obj.oPosX, obj.oPosY, obj.oPosZ)
         RainbowNoteStarSpawned = true
         obj_mark_for_deletion(obj)
@@ -293,20 +290,20 @@ function bhv_rainbownote_starspawn_loop(obj)
 end
 
 hook_event(HOOK_ON_OBJECT_UNLOAD,
-    ---@param obj Object
-    function(obj)
-        -- Force spawn star for newly entering players
-        if obj_has_behavior_id(obj, bhvRainbowNote_StarSpawn) == 1 and obj.oHiddenStarTriggerCounter ~= obj.oHealth and not RainbowNoteStarSpawned then
-            local starspawn_obj = obj_get_first_with_behavior_id(bhvRainbowNote_StarSpawn)
-            spawn_red_coin_cutscene_star(starspawn_obj.oPosX, starspawn_obj.oPosY, starspawn_obj.oPosZ)
-            RainbowNoteStarSpawned = true
-        end
-    end)
+---@param obj Object
+function(obj)
+    -- Force spawn star for newly entering players
+    if obj_has_behavior_id(obj, bhvRainbowNote_StarSpawn) == 1 and obj.oHiddenStarTriggerCounter ~= obj.oHealth and not RainbowNoteStarSpawned then
+        local starspawn_obj = obj_get_first_with_behavior_id(bhvRainbowNote_StarSpawn)
+        spawn_red_coin_cutscene_star(starspawn_obj.oPosX, starspawn_obj.oPosY, starspawn_obj.oPosZ)
+        RainbowNoteStarSpawned = true
+    end
+end)
 
-id_bhvQuestionCoin = hook_behavior(nil, OBJ_LIST_LEVEL, false, bhv_question_coin_init, bhv_question_coin_loop,
+--[[id_bhvQuestionCoin = hook_behavior(nil, OBJ_LIST_LEVEL, false, bhv_question_coin_init, bhv_question_coin_loop,
     "bhvQuestionCoin")
 id_bhvRainbownote = hook_behavior(nil, OBJ_LIST_LEVEL, false, bhv_rainbow_note_init, bhv_rainbow_note_loop,
-    "bhvRainbownote")
+    "bhvRainbownote")]]
 --#endregion
 
 -- Dialogue Replacements & Toad Star
@@ -367,7 +364,7 @@ to fix the starship.\
 is ok... I'm worried...")
 
 -- Blue Toad Star
-add_toad_star_spawn(DIALOG_120, 5, nil, nil, nil, DIALOG_121)
+add_toad_star_spawn(DIALOG_120, 0, nil, nil, nil, DIALOG_121)
 
 -- Yellow Toad Dialogue
 
@@ -384,5 +381,23 @@ that castle...\
 It's so...\
 far... away. . .\
 ... zZz... Zzz...")
+
+--#endregion
+
+-- Simple Planet Rotation
+--#region
+E_MODEL_GAS_GIANT = smlua_model_util_get_id("gas_giant_geo")
+
+function bhv_gas_giant_init(o)
+    o.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
+    o.header.gfx.skipInViewCheck = true
+end
+
+function bhv_gas_giant_loop(o)
+    o.oFaceAngleYaw = o.oFaceAngleYaw + 0x30
+end
+
+id_bhvGasGiant = hook_behavior(bhvGasGiant, OBJ_LIST_LEVEL, false, bhv_gas_giant_init, bhv_gas_giant_loop)
+
 
 --#endregion
