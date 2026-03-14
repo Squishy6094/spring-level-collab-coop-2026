@@ -6,7 +6,7 @@ const GeoLayout ddd_area_1_geo[] = {
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -25718, 4190, -23120, -1, 2, 11, ddd_dl_Asteroid_002_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 926, 676, -9733, 0, 29, 0, ddd_dl_Asteroid_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Asteroid_004_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2012, -174, -27942, 0, 76, 0, ddd_dl_Captain_Toad_Ship_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2012, 386, -27942, 0, 76, 0, ddd_dl_Captain_Toad_Ship_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Captain_Toad_Ship_mesh_layer_4),
 		GEO_CLOSE_NODE(),
@@ -16,7 +16,7 @@ const GeoLayout ddd_area_1_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Level_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Rainbow_Road_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Rainbow_Road_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2000, -1000, -28000, ddd_dl_Toad_Planet_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2000, -440, -28000, ddd_dl_Toad_Planet_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -59,17 +59,17 @@ E_SOUND_RAINBOW_NOTE = audio_sample_load("rainbow_note.ogg")
 
 
 
-QUESTIONCOIN_IDLE = 0
-QUESTIONCOIN_ACTIVE = 1
-RAINBOWNOTE_IDLE = QUESTIONCOIN_IDLE
-RAINBOWNOTE_ACTIVE = QUESTIONCOIN_ACTIVE
-RAINBOWNOTE_RESET = 2
+local QUESTIONCOIN_IDLE = 0
+local QUESTIONCOIN_ACTIVE = 1
+local RAINBOWNOTE_IDLE = 0
+local RAINBOWNOTE_ACTIVE = 1
+local RAINBOWNOTE_RESET = 2
 
-rainbowTimer = 720
-questionInteract = false
-rainbowNotes = 1
+local rainbowTimer = 720
+local questionInteract = false
+local rainbowNotes = 0
 
-RainbowNoteStarSpawned = false
+local RainbowNoteStarSpawned = false
 
 ---@param param any
 ---@param case_table table<any, function>
@@ -196,8 +196,7 @@ function bhv_rainbow_note_init(obj)
     network_init_object(obj, false, {
         "oAction"
     })
-    rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
-    obj.oAction = RAINBOWNOTE_IDLE
+    obj.oAction = RAINBOWNOTE_RESET
     questionInteract = false
 
 end
@@ -223,7 +222,6 @@ function bhv_rainbow_note_loop(obj)
                     obj.oAction = RAINBOWNOTE_ACTIVE
 
                 else   
-                rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
                 cur_obj_disable_rendering()
                 cur_obj_become_intangible()
                 obj.oTimer = 0
@@ -244,7 +242,7 @@ function bhv_rainbow_note_loop(obj)
                     audio_sample_play(E_SOUND_RAINBOW_NOTE, oPos, 1.5)
                     cur_obj_disable_rendering()
                     cur_obj_become_intangible()
-                    rainbowNotes = rainbowNotes - 1
+                    rainbowNotes = rainbowNotes + 1
                     obj.oInteractStatus = 0
                 
                 end
@@ -257,7 +255,7 @@ function bhv_rainbow_note_loop(obj)
                 end
             end,
             [RAINBOWNOTE_RESET] = function()
-                rainbowNotes = obj_count_objects_with_behavior_id(bhvRainbowNote)
+                rainbowNotes = 0
                 questionInteract = false
                 obj.oAction = RAINBOWNOTE_IDLE
             end 
@@ -265,22 +263,29 @@ function bhv_rainbow_note_loop(obj)
     end
 end
 
-
+hook_event(HOOK_ON_LEVEL_INIT,
+function ()
+    RainbowNoteStarSpawned = false
+    rainbowNotes = 0
+end
+)
 
 ---@param obj Object
 function bhv_rainbownote_starspawn_init(obj)
     obj.oFlags = OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE
     obj.oHealth = rainbowNotes
-    RainbowNoteStarSpawned = false
 end
 
 ---@param obj Object
 function bhv_rainbownote_starspawn_loop(obj)
 
 
-    obj.oHealth = rainbowNotes
+    if obj.oHealth ~= rainbowNotes then
+        obj.oHealth = rainbowNotes
+    end
 
-    obj.oHiddenStarTriggerCounter = 0
+    obj.oHiddenStarTriggerCounter = obj_count_objects_with_behavior_id(bhvRainbowNote)
+
 
     if obj.oHiddenStarTriggerCounter == obj.oHealth and not RainbowNoteStarSpawned then
         spawn_red_coin_cutscene_star(obj.oPosX, obj.oPosY, obj.oPosZ)
